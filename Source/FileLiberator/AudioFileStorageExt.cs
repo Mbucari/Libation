@@ -18,7 +18,7 @@ namespace FileLiberator
 		{
 			if (libraryBook.Book.IsEpisodeChild() && Configuration.Instance.SavePodcastsToParentFolder)
 			{
-				var series = libraryBook.Book.SeriesLink.SingleOrDefault();
+				var series = libraryBook.Book.SeriesBooks.SingleOrDefault();
 				if (series is not null)
 				{
 					var seriesParent = ApplicationServices.DbContexts.GetContext().GetLibraryBook_Flat_NoTracking(series.Series.AudibleSeriesId);

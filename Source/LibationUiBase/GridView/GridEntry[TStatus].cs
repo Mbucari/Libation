@@ -27,7 +27,6 @@ namespace LibationUiBase.GridView
 		[Browsable(false)] public string AudibleProductId => Book.AudibleProductId;
 		[Browsable(false)] public LibraryBook LibraryBook { get; protected set; }
 		[Browsable(false)] public float SeriesIndex { get; protected set; }
-		[Browsable(false)] public string LongDescription { get; protected set; }
 		[Browsable(false)] public abstract DateTime DateAdded { get; }
 		[Browsable(false)] public Book Book => LibraryBook.Book;
 
@@ -107,11 +106,9 @@ namespace LibationUiBase.GridView
 
 			Title = Book.TitleWithSubtitle;
 			Series = Book.SeriesNames(includeIndex: true);
-			SeriesOrder = new SeriesOrder(Book.SeriesLink);
+			SeriesOrder = new SeriesOrder(Book.SeriesBooks);
 			Length = GetBookLengthString();
-			//Ratings are changed using Update(), which is a problem for Avalonia data bindings because
-			//the reference doesn't change. Clone the rating so that it updates within Avalonia properly.
-			_myRating = new Rating(Book.UserDefinedItem.Rating.OverallRating, Book.UserDefinedItem.Rating.PerformanceRating, Book.UserDefinedItem.Rating.StoryRating);
+			RaiseAndSetIfChanged(ref _myRating, Book.UserDefinedItem.Rating, nameof(MyRating));
 			PurchaseDate = GetPurchaseDateString();
 			ProductRating = Book.Rating ?? new Rating(0, 0, 0);
 			Authors = Book.AuthorNames();
@@ -119,12 +116,9 @@ namespace LibationUiBase.GridView
 			Category = string.Join(", ", Book.LowestCategoryNames());
 			Misc = GetMiscDisplay(libraryBook);
 			LastDownload = new(Book.UserDefinedItem);
-			LongDescription = GetDescriptionDisplay(Book);
-			Description = LongDescription;// TrimTextToWord(LongDescription, 62);
-			SeriesIndex = Book.SeriesLink.FirstOrDefault()?.Index ?? 0;
+			Description = GetDescriptionDisplay(Book);
+			SeriesIndex = Book.SeriesBooks.FirstOrDefault()?.Index ?? 0;
 			BookTags = GetBookTags();
-
-			RaisePropertyChanged(nameof(MyRating));
 
 			UserDefinedItem.ItemChanged += UserDefinedItem_ItemChanged;
 		}
@@ -181,6 +175,8 @@ namespace LibationUiBase.GridView
 					LastDownload = new (udi);
 					break;
 				case nameof(udi.Rating):
+					//Ratings are changed using Update(), which is a problem for Avalonia data bindings because the reference
+					//doesn't change. So always notify that MyRating has changed instead of calling RaiseAndSetIfChanged
 					_myRating = udi.Rating;
 					RaisePropertyChanged(nameof(MyRating));
 					break;

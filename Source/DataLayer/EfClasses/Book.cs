@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Dinah.Core;
 using Microsoft.EntityFrameworkCore;
@@ -90,9 +91,9 @@ namespace DataLayer
 
             // non-ef-ctor init.s
             UserDefinedItem = new UserDefinedItem(this);
-            _contributorsLink = new HashSet<BookContributor>();
-            _categoriesLink = new HashSet<BookCategory>();
-            _seriesLink = new HashSet<SeriesBook>();
+            ContributorsLink = new HashSet<BookContributor>();
+            CategoriesLink = new HashSet<BookCategory>();
+            SeriesLink = new HashSet<SeriesBook>();
             _supplements = new HashSet<Supplement>();
 
             // simple assigns
@@ -114,14 +115,7 @@ namespace DataLayer
 
 		#region contributors, authors, narrators
 		// use uninitialised backing fields - this means we can detect if the collection was loaded
-		private HashSet<BookContributor> _contributorsLink;
-        // i'd like this to be internal but migration throws this exception when i try:
-        //   Value cannot be null.
-        //   Parameter name: property
-        public IEnumerable<BookContributor> ContributorsLink
-            => _contributorsLink?
-                .OrderBy(bc => bc.Order)
-                .ToList();
+		internal HashSet<BookContributor> ContributorsLink;
 
         public IEnumerable<Contributor> Authors => getContributions(Role.Author).Select(bc => bc.Contributor).ToList();
         public IEnumerable<Contributor> Narrators => getContributions(Role.Narrator).Select(bc => bc.Contributor).ToList();
@@ -138,15 +132,15 @@ namespace DataLayer
             ArgumentValidator.EnsureEnumerableNotNullOrEmpty(newContributors, nameof(newContributors));
 
             // the edge cases of doing local-loaded vs remote-only got weird. just load it
-            if (_contributorsLink is null)
+            if (ContributorsLink is null)
 				getEntry(context).Collection(s => s.ContributorsLink).Load();
 
-			var roleContributions = getContributions(role);
+			var roleContributions = getContributions(role).ToList();
             var isIdentical = roleContributions.Select(c => c.Contributor).SequenceEqual(newContributors);
             if (isIdentical)
                 return;
 
-            _contributorsLink.RemoveWhere(bc => bc.Role == role);
+            ContributorsLink.RemoveWhere(bc => bc.Role == role);
             addNewContributors(newContributors, role);
         }
 
@@ -155,14 +149,13 @@ namespace DataLayer
             byte order = 0;
             var newContributionsEnum = newContributors.Select(c => new BookContributor(this, c, role, order++));
             var newContributions = new HashSet<BookContributor>(newContributionsEnum);
-            _contributorsLink.UnionWith(newContributions);
+            ContributorsLink.UnionWith(newContributions);
         }
 
-        private List<BookContributor> getContributions(Role role)
+        private IEnumerable<BookContributor> getContributions(Role role)
             => ContributorsLink
                 .Where(a => a.Role == role)
-                .OrderBy(a => a.Order)
-                .ToList();
+                .OrderBy(a => a.Order);
         #endregion
 
 		private Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<Book> getEntry(DbContext context)
@@ -176,31 +169,41 @@ namespace DataLayer
 
 			return entry;
 		}
+
 		#region categories
-		private HashSet<BookCategory> _categoriesLink;
-		public IEnumerable<BookCategory> CategoriesLink => _categoriesLink?.ToList();
-		public void UpsertCategories(CategoryLadder ladder)
+		internal HashSet<BookCategory> CategoriesLink;
+		internal ReadOnlyCollection<BookCategory> _bookCategories;
+		public ReadOnlyCollection<BookCategory> BookCategories
 		{
-			ArgumentValidator.EnsureNotNull(ladder, nameof(ladder));
+			get
+			{
+				if (_bookCategories?.SequenceEqual(CategoriesLink) is not true)
+					_bookCategories = CategoriesLink.ToList().AsReadOnly();
+				return _bookCategories;
+			}
+		}
+		public void SetCategoryLadders(IEnumerable<CategoryLadder> ladders)
+		{
+			ArgumentValidator.EnsureNotNull(ladders, nameof(ladders));
 
-			var singleBookCategory = _categoriesLink.SingleOrDefault(bc => bc.CategoryLadder.Equals(ladder));
-
-			if (singleBookCategory is null)
-				_categoriesLink.Add(new BookCategory(this, ladder));
-            else
-            {
-                for (var i = 0; i < ladder._categories.Count; i++)
-                {
-                    //Update the category name
-					singleBookCategory.CategoryLadder._categories[i].Name = ladder._categories[i].Name;
-				}
-            }
+            CategoriesLink.Clear();
+            foreach (var ladder in ladders)
+				CategoriesLink.Add(new BookCategory(this, ladder));
 		}
 		#endregion
 
 		#region series
-		private HashSet<SeriesBook> _seriesLink;
-        public IEnumerable<SeriesBook> SeriesLink => _seriesLink?.ToList();
+		internal HashSet<SeriesBook> SeriesLink;
+		private ReadOnlyCollection<SeriesBook> _seriesBooks;
+        public ReadOnlyCollection<SeriesBook> SeriesBooks
+        {
+            get
+            {
+                if (_seriesBooks?.SequenceEqual(SeriesLink) is not true)
+                    _seriesBooks = SeriesLink.ToList().AsReadOnly();
+                return _seriesBooks;
+			}
+        }
 
         public void UpsertSeries(Series series, string order, DbContext context = null)
         {
@@ -208,12 +211,12 @@ namespace DataLayer
 
             // our add() is conditional upon what's already included in the collection.
             // therefore if not loaded, a trip is required. might as well just load it
-            if (_seriesLink is null)
+            if (SeriesLink is null)
 				getEntry(context).Collection(s => s.SeriesLink).Load();
 
-			var singleSeriesBook = _seriesLink.SingleOrDefault(sb => sb.Series == series);
+			var singleSeriesBook = SeriesLink.SingleOrDefault(sb => sb.Series == series);
             if (singleSeriesBook is null)
-                _seriesLink.Add(new SeriesBook(series, this, order));
+                SeriesLink.Add(new SeriesBook(series, this, order));
             else
                 singleSeriesBook.UpdateOrder(order);
         }

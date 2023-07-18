@@ -332,7 +332,7 @@ namespace LibationAvalonia.Views
 			#endregion
 			#region View All Series
 
-			if (entry.Book.SeriesLink.Any())
+			if (entry.Book.SeriesBooks.Any())
 			{
 				var header = entry.Liberate.IsSeries ? "View All Episodes in Series" : "View All Books in Series";
 				var viewSeriesMenuItem = new MenuItem { Header = header };
@@ -536,7 +536,7 @@ namespace LibationAvalonia.Views
 				var displayWindow = new DescriptionDisplayDialog
 				{
 					SpawnLocation = new Point(pt.X, pt.Y),
-					DescriptionText = gEntry.LongDescription,
+					DescriptionText = gEntry.Description,
 				};
 
 				void CloseWindow(object o, DataGridRowEventArgs e)

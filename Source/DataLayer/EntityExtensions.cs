@@ -22,17 +22,17 @@ namespace DataLayer
 		public static bool HasPdf(this Book book) => book.Supplements.Any();
         public static string SeriesNames(this Book book, bool includeIndex = false)
         {
-            if (book.SeriesLink is null)
+            if (book.SeriesBooks is null)
                 return "";
 
             // first: alphabetical by name
-            var withNames = book.SeriesLink
+            var withNames = book.SeriesBooks
                 .Where(s => !string.IsNullOrWhiteSpace(s.Series.Name))
                 .Select(getSeriesNameString)
                 .OrderBy(a => a)
                 .ToList();
             // then un-named are alpha by series id
-            var nullNames = book.SeriesLink
+            var nullNames = book.SeriesBooks
                 .Where(s => string.IsNullOrWhiteSpace(s.Series.Name))
                 .Select(s => s.Series.AudibleSeriesId)
                 .OrderBy(a => a)
@@ -48,18 +48,18 @@ namespace DataLayer
 		}
 
         public static string[] LowestCategoryNames(this Book book)
-            => book.CategoriesLink?.Any() is not true ? Array.Empty<string>()
+            => book.BookCategories?.Any() is not true ? Array.Empty<string>()
 			: book
-                .CategoriesLink
+                .BookCategories
                 .Select(cl => cl.CategoryLadder.Categories.LastOrDefault()?.Name)
                 .Where(c => c is not null)
                 .Distinct()
                 .ToArray();
 
 		public static string[] CategoriesIds(this Book book)
-            => book.CategoriesLink?.Any() is not true ? null
+            => book.BookCategories?.Any() is not true ? null
             : book
-                .CategoriesLink
+                .BookCategories
                 .SelectMany(cl => cl.CategoryLadder.Categories)
                 .Select(c => c.AudibleCategoryId)
                 .ToArray();

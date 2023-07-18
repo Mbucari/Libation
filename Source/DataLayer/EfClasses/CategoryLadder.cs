@@ -11,7 +11,16 @@ namespace DataLayer
 		internal int CategoryLadderId { get; private set; }
 
 		internal List<Category> _categories;
-		public ReadOnlyCollection<Category> Categories => _categories.AsReadOnly();
+		private ReadOnlyCollection<Category> _categoriesReadOnly;
+		public ReadOnlyCollection<Category> Categories
+		{
+			get
+			{
+				if (_categoriesReadOnly?.SequenceEqual(_categories) is not true)
+					_categoriesReadOnly = _categories.AsReadOnly();
+				return _categoriesReadOnly;
+			}
+		}
 
 		private HashSet<BookCategory> _booksLink;
 		public IEnumerable<BookCategory> BooksLink => _booksLink?.ToList();

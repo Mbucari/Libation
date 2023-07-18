@@ -17,21 +17,6 @@ namespace DataLayer.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
 
-            modelBuilder.Entity("CategoryCategoryLadder", b =>
-                {
-                    b.Property<int>("_categoriesCategoryId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("_categoryLaddersCategoryLadderId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("_categoriesCategoryId", "_categoryLaddersCategoryLadderId");
-
-                    b.HasIndex("_categoryLaddersCategoryLadderId");
-
-                    b.ToTable("CategoryCategoryLadder");
-                });
-
             modelBuilder.Entity("DataLayer.Book", b =>
                 {
                     b.Property<int>("BookId")
@@ -40,6 +25,9 @@ namespace DataLayer.Migrations
 
                     b.Property<string>("AudibleProductId")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("ContentType")
                         .HasColumnType("INTEGER");
@@ -81,24 +69,9 @@ namespace DataLayer.Migrations
 
                     b.HasIndex("AudibleProductId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Books");
-                });
-
-            modelBuilder.Entity("DataLayer.BookCategory", b =>
-                {
-                    b.Property<int>("BookId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CategoryLadderId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("BookId", "CategoryLadderId");
-
-                    b.HasIndex("BookId");
-
-                    b.HasIndex("CategoryLadderId");
-
-                    b.ToTable("BookCategory");
                 });
 
             modelBuilder.Entity("DataLayer.BookContributor", b =>
@@ -136,9 +109,14 @@ namespace DataLayer.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("ParentCategoryCategoryId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("CategoryId");
 
                     b.HasIndex("AudibleCategoryId");
+
+                    b.HasIndex("ParentCategoryCategoryId");
 
                     b.ToTable("Categories");
 
@@ -148,23 +126,6 @@ namespace DataLayer.Migrations
                             CategoryId = -1,
                             AudibleCategoryId = "",
                             Name = ""
-                        });
-                });
-
-            modelBuilder.Entity("DataLayer.CategoryLadder", b =>
-                {
-                    b.Property<int>("CategoryLadderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("CategoryLadderId");
-
-                    b.ToTable("CategoryLadders");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryLadderId = -1
                         });
                 });
 
@@ -255,23 +216,14 @@ namespace DataLayer.Migrations
                     b.ToTable("SeriesBook");
                 });
 
-            modelBuilder.Entity("CategoryCategoryLadder", b =>
-                {
-                    b.HasOne("DataLayer.Category", null)
-                        .WithMany()
-                        .HasForeignKey("_categoriesCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DataLayer.CategoryLadder", null)
-                        .WithMany()
-                        .HasForeignKey("_categoryLaddersCategoryLadderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("DataLayer.Book", b =>
                 {
+                    b.HasOne("DataLayer.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.OwnsOne("DataLayer.Rating", "Rating", b1 =>
                         {
                             b1.Property<int>("BookId")
@@ -372,30 +324,13 @@ namespace DataLayer.Migrations
                             b1.Navigation("Rating");
                         });
 
+                    b.Navigation("Category");
+
                     b.Navigation("Rating");
 
                     b.Navigation("Supplements");
 
                     b.Navigation("UserDefinedItem");
-                });
-
-            modelBuilder.Entity("DataLayer.BookCategory", b =>
-                {
-                    b.HasOne("DataLayer.Book", "Book")
-                        .WithMany("CategoriesLink")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DataLayer.CategoryLadder", "CategoryLadder")
-                        .WithMany("BooksLink")
-                        .HasForeignKey("CategoryLadderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-
-                    b.Navigation("CategoryLadder");
                 });
 
             modelBuilder.Entity("DataLayer.BookContributor", b =>
@@ -415,6 +350,15 @@ namespace DataLayer.Migrations
                     b.Navigation("Book");
 
                     b.Navigation("Contributor");
+                });
+
+            modelBuilder.Entity("DataLayer.Category", b =>
+                {
+                    b.HasOne("DataLayer.Category", "ParentCategory")
+                        .WithMany()
+                        .HasForeignKey("ParentCategoryCategoryId");
+
+                    b.Navigation("ParentCategory");
                 });
 
             modelBuilder.Entity("DataLayer.LibraryBook", b =>
@@ -449,16 +393,9 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("DataLayer.Book", b =>
                 {
-                    b.Navigation("CategoriesLink");
-
                     b.Navigation("ContributorsLink");
 
                     b.Navigation("SeriesLink");
-                });
-
-            modelBuilder.Entity("DataLayer.CategoryLadder", b =>
-                {
-                    b.Navigation("BooksLink");
                 });
 
             modelBuilder.Entity("DataLayer.Contributor", b =>

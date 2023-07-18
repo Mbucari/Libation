@@ -59,23 +59,8 @@ namespace DataLayer.Configurations
                     b_udi.OwnsOne(udi => udi.Rating);
                 });
 
-            entity
-                .Metadata
-                .FindNavigation(nameof(Book.ContributorsLink))
-                // PropertyAccessMode.Field : Contributions is a get-only property, not a field, so use its backing field
-                .SetPropertyAccessMode(PropertyAccessMode.Field);
-
-            entity
-                .Metadata
-                .FindNavigation(nameof(Book.SeriesLink))
-                // PropertyAccessMode.Field : Series is a get-only property, not a field, so use its backing field
-                .SetPropertyAccessMode(PropertyAccessMode.Field);
-
-            entity
-                .Metadata
-                .FindNavigation(nameof(Book.CategoriesLink))
-				// PropertyAccessMode.Field : Categories is a get-only property, not a field, so use its backing field
-				.SetPropertyAccessMode(PropertyAccessMode.Field);
+            entity.Ignore(b => b.SeriesBooks);
+            entity.Ignore(b => b.BookCategories);
         }
     }
 }

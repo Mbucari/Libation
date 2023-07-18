@@ -76,7 +76,7 @@ namespace LibationUiBase.SeriesView
 			var api = await libraryBook.GetApiAsync();
 
 			//Get Item for each series that this book belong to
-			var seriesItemsTask = api.GetCatalogProductsAsync(libraryBook.Book.SeriesLink.Select(s => s.Series.AudibleSeriesId), CatalogOptions.ResponseGroupOptions.Media | CatalogOptions.ResponseGroupOptions.Relationships);
+			var seriesItemsTask = api.GetCatalogProductsAsync(libraryBook.Book.SeriesBooks.Select(s => s.Series.AudibleSeriesId), CatalogOptions.ResponseGroupOptions.Media | CatalogOptions.ResponseGroupOptions.Relationships);
 
 			using var semaphore = new SemaphoreSlim(10);
 

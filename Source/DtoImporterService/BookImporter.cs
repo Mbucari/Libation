@@ -188,13 +188,13 @@ namespace DtoImporterService
 
 			if (item.CategoryLadders is not null)
 			{
+				List<DataLayer.CategoryLadder> ladders = new();
 				foreach (var ladder in item.CategoryLadders.Select(cl => cl.Ladder).Where(l => l?.Length > 0))
 				{
 					var categoryIds = ladder.Select(l => l.CategoryId).ToList();
-					var cata = categoryImporter.LadderCache.Single(c => c.Equals(categoryIds));
-
-					book.UpsertCategories(cata);
+					ladders.Add(categoryImporter.LadderCache.Single(c => c.Equals(categoryIds)));
 				}
+				book.SetCategoryLadders(ladders);
 			}
 		}
 

@@ -40,7 +40,7 @@ namespace LibationSearchEngine
             { FieldType.String, lb => lb.Book.NarratorNames(), "NarratorNames", "Narrator", "Narrators" },
             { FieldType.String, lb => lb.Book.Publisher, nameof(Book.Publisher) },
             { FieldType.String, lb => lb.Book.SeriesNames(), "SeriesNames", "Narrator", "Series" },
-            { FieldType.String, lb => string.Join(", ", lb.Book.SeriesLink.Select(s => s.Series.AudibleSeriesId)), "SeriesId" },
+            { FieldType.String, lb => string.Join(", ", lb.Book.SeriesBooks.Select(s => s.Series.AudibleSeriesId)), "SeriesId" },
             { FieldType.String, lb => lb.Book.CategoriesIds() is null ? null : string.Join(", ", lb.Book.CategoriesIds()), "Category", "Categories", "CategoriesId", "CategoryId", "CategoriesNames" },
             { FieldType.String, lb => lb.Book.UserDefinedItem.Tags, TAGS.FirstCharToUpper() },
             { FieldType.String, lb => lb.Book.Locale, "Locale", "Region" },

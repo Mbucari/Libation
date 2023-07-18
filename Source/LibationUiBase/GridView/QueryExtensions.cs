@@ -23,7 +23,7 @@ namespace LibationUiBase.GridView
 
 		public static ISeriesEntry? FindSeriesParent(this IEnumerable<IGridEntry> gridEntries, LibraryBook seriesEpisode)
 		{
-			if (seriesEpisode.Book.SeriesLink is null) return null;
+			if (seriesEpisode.Book.SeriesBooks is null) return null;
 
 			try
 			{
@@ -31,8 +31,8 @@ namespace LibationUiBase.GridView
 				//they are imported in ApiExtended.getChildEpisodesAsync()
 				return gridEntries.SeriesEntries().FirstOrDefault(
 					lb =>
-					seriesEpisode.Book.SeriesLink.Any(
-						s => s.Series.AudibleSeriesId == lb.LibraryBook.Book.SeriesLink.Single().Series.AudibleSeriesId));
+					seriesEpisode.Book.SeriesBooks.Any(
+						s => s.Series.AudibleSeriesId == lb.LibraryBook.Book.SeriesBooks.Single().Series.AudibleSeriesId));
 			}
 			catch (Exception ex)
 			{

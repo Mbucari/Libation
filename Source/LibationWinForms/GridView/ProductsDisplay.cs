@@ -75,7 +75,7 @@ namespace LibationWinForms.GridView
 			var displayWindow = new DescriptionDisplay
 			{
 				SpawnLocation = PointToScreen(cellRectangle.Location + new Size(cellRectangle.Width, 0)),
-				DescriptionText = liveGridEntry.LongDescription,
+				DescriptionText = liveGridEntry.Description,
 				BorderThickness = 2,
 			};
 
@@ -241,7 +241,7 @@ namespace LibationWinForms.GridView
 			#endregion
 			#region View All Series
 
-			if (entry.Book.SeriesLink.Any())
+			if (entry.Book.SeriesBooks.Any())
 			{
 				var header = entry.Liberate.IsSeries ? "View All Episodes in Series" : "View All Books in Series";
 

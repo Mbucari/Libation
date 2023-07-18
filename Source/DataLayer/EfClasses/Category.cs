@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Dinah.Core;
 
 namespace DataLayer
@@ -21,7 +23,17 @@ namespace DataLayer
         public string Name { get; internal set; }
 
         internal List<CategoryLadder> _categoryLadders = new();
-        public IReadOnlyCollection<CategoryLadder> CategoryLadders => _categoryLadders.AsReadOnly();
+        private ReadOnlyCollection<CategoryLadder> _categoryLaddersReadOnly;
+
+		public ReadOnlyCollection<CategoryLadder> CategoryLadders
+        {
+            get
+            {
+                if (_categoryLaddersReadOnly?.SequenceEqual(_categoryLadders) is not true)
+					_categoryLaddersReadOnly = _categoryLadders.AsReadOnly();
+                return _categoryLaddersReadOnly;
+			}
+        }
 
 		private Category() { }
         /// <summary>special id class b/c it's too easy to get string order mixed up</summary>

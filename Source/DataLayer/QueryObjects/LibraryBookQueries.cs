@@ -71,7 +71,7 @@ namespace DataLayer
 #nullable enable
         public static LibraryBook? FindSeriesParent(this IEnumerable<LibraryBook> libraryBooks, LibraryBook seriesEpisode)
         {
-            if (seriesEpisode.Book.SeriesLink is null) return null;
+            if (seriesEpisode.Book.SeriesBooks is null) return null;
 
             try
             {
@@ -80,8 +80,8 @@ namespace DataLayer
                 return libraryBooks.FirstOrDefault(
                     lb =>
                     lb.Book.IsEpisodeParent() &&
-                    seriesEpisode.Book.SeriesLink.Any(
-                        s => s.Series.AudibleSeriesId == lb.Book.SeriesLink.Single().Series.AudibleSeriesId));
+                    seriesEpisode.Book.SeriesBooks.Any(
+                        s => s.Series.AudibleSeriesId == lb.Book.SeriesBooks.Single().Series.AudibleSeriesId));
             }
             catch (System.Exception ex)
             {
@@ -96,7 +96,7 @@ namespace DataLayer
             .Where(
                 lb => 
                 lb.Book.IsEpisodeChild() && 
-                lb.Book.SeriesLink?
+                lb.Book.SeriesBooks?
                     .Any(
                         s => 
                         s.Series.AudibleSeriesId == parent.Book.AudibleProductId
