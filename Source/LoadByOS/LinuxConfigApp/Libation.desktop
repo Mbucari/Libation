@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Libation
-Exec=env OPENSSL_ENABLE_SHA1_SIGNATURES=1 /usr/bin/libation
+Exec=env OPENSSL_ENABLE_SHA1_SIGNATURES="1" /usr/bin/libation
 Icon=libation
 Comment=Liberate your Audiobooks
 Terminal=false
