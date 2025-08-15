@@ -8,3 +8,4 @@ Type=Application
 MimeType=x-content/unix-software;
 Categories=Audio;AudioVideo;
 Keywords=audible;audio;audiobook;book;
+Exec=env OPENSSL_ENABLE_SHA1_SIGNATURES=1
