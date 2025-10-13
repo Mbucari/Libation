@@ -8,7 +8,10 @@ namespace LibationFileManager.Templates;
 
 public class SeriesOrder : IFormattable
 {
-	public object[] OrderParts { get; }
+	/// <summary>
+	/// The parsed series_order field from the Audible library scans. floats and strings.
+	/// </summary>
+	private object[] OrderParts { get; }
 	private SeriesOrder(object[] orderParts)
 	{
 		OrderParts = orderParts;
@@ -20,7 +23,14 @@ public class SeriesOrder : IFormattable
 	/// Use float formatters to format the number parts of the order.
 	/// </summary>
 	public string ToString(string? format, IFormatProvider? formatProvider)
-		=> string.Concat(OrderParts.Select(p => p is float f ? f.ToString(format) : p.ToString())).Trim();
+	{
+		//Provide an alias for zero padding with a specific number of digits.
+		//e.g. <series#[3]> means <series#[000.###########]>.
+		//We add some decimal places to preserve any fractional part.
+		if (int.TryParse(format, out var numDigits) && numDigits < 50)
+			format = new string('0', numDigits) + ".###########";
+		return string.Concat(OrderParts.Select(p => p is float f ? f.ToString(format) : p.ToString())).Trim();
+	}
 
 	public static SeriesOrder Parse(string? order)
 	{
