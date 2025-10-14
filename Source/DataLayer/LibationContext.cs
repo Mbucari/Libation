@@ -1,10 +1,12 @@
 ﻿using DataLayer.Configurations;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading.Tasks;
 
 namespace DataLayer
 {
-    public class LibationContext : DbContext
-    {
+	public class LibationContext : DbContext, INotifyDispose<LibationContext>
+	{
         // IMPORTANT: USING DbSet<>
         // ========================
         // these run against the db. linq queries against these MUST be translatable to sql. primatives only. no POCOs or this error occurs:
@@ -25,7 +27,19 @@ namespace DataLayer
         public DbSet<Category> Categories { get; private set; }
         public DbSet<CategoryLadder> CategoryLadders { get; private set; }
 
-        public static LibationContext Create(string connectionString)
+		public event EventHandler ObjectDisposed;
+		public override void Dispose()
+		{
+			base.Dispose();
+			ObjectDisposed?.Invoke(this, EventArgs.Empty);
+		}
+		public override async ValueTask DisposeAsync()
+		{
+			await base.DisposeAsync();
+			ObjectDisposed?.Invoke(this, EventArgs.Empty);
+		}
+
+		public static LibationContext Create(string connectionString)
         {
             var factory = new LibationContextFactory();
             var context = factory.Create(connectionString);

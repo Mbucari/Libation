@@ -91,22 +91,6 @@ namespace LibationSearchEngine
             }
         }
 
-        /// <summary>Long running. Use await Task.Run(() => UpdateBook(productId))</summary>
-        public void UpdateBook(LibationContext context, string productId)
-        {
-            var libraryBook = context.GetLibraryBook_Flat_NoTracking(productId);
-            var term = new Term(_ID_, productId);
-
-            var document = createBookIndexDocument(libraryBook);
-            var createNewIndex = false;
-
-            using var index = getIndex();
-            using var analyzer = new StandardAnalyzer(Version);
-            using var ixWriter = new IndexWriter(index, analyzer, createNewIndex, IndexWriter.MaxFieldLength.UNLIMITED);
-            ixWriter.DeleteDocuments(term);
-            ixWriter.AddDocument(document);
-        }
-
         private static Document createBookIndexDocument(LibraryBook libraryBook)
         {
             var doc = new Document();
