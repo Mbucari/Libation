@@ -7,11 +7,7 @@
 	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 	  <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
   </PropertyGroup>
-
-  <ItemGroup>
-	<PackageReference Include="SixLabors.ImageSharp" Version="3.1.11" />
-  </ItemGroup>
-
+	
   <ItemGroup>
 	<ProjectReference Include="..\ApplicationServices\ApplicationServices.csproj" />
 	<ProjectReference Include="..\AppScaffolding\AppScaffolding.csproj" />
