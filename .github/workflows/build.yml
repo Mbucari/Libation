@@ -49,7 +49,7 @@ jobs:
       publish-r2r: ${{ inputs.publish-r2r }}
       retention-days: ${{ inputs.retention-days }}
       architecture: ${{ matrix.architecture }}
-      sign-app: ${{ inputs.release || vars.SIGN_MAC_APP == 'true' }}
+      sign-app: ${{ inputs.release || vars.SIGN_MAC_APP_ON_VALIDATE == 'true' }}
     secrets: inherit
 
   linux:
