@@ -12,4 +12,7 @@ public partial class TagsBatchDialog : DialogWindow
 
 		DataContext = this;
 	}
+
+	// For compiled bindings
+	public new void SaveAndClose() => base.SaveAndClose();
 }

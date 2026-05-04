@@ -5,9 +5,11 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         mc:Ignorable="d" d:DesignWidth="265" d:DesignHeight="110"
 		MinWidth="265" MinHeight="110"
+		CanMaximize="False"
+		CanMinimize="False"
 		x:DataType="vm:MessageBoxViewModel"
         x:Class="LibationAvalonia.Dialogs.MessageBoxWindow"
-        Title="{CompiledBinding Caption}" ShowInTaskbar="True">
+        Title="{Binding Caption}" ShowInTaskbar="True">
 	
 	<Grid ColumnDefinitions="*" RowDefinitions="*,Auto">
 		
@@ -18,19 +20,19 @@
 				<Panel Height="32" Width="32" Grid.Column="0" Margin="5,0,5,0" VerticalAlignment="Top">
 					<Panel.IsVisible>
 						<MultiBinding Converter="{x:Static BoolConverters.Or}">
-							<CompiledBinding Path="IsAsterisk" />
-							<CompiledBinding Path="IsError" />
-							<CompiledBinding Path="IsQuestion" />
-							<CompiledBinding Path="IsExclamation" />
+							<Binding Path="IsAsterisk" />
+							<Binding Path="IsError" />
+							<Binding Path="IsQuestion" />
+							<Binding Path="IsExclamation" />
 						</MultiBinding>
 					</Panel.IsVisible>
-					<Image IsVisible="{CompiledBinding IsAsterisk}" Stretch="Uniform" Source="/Assets/MBIcons/Asterisk_64.png"/>
-					<Image IsVisible="{CompiledBinding IsError}" Stretch="Uniform" Source="/Assets/MBIcons/Error_64.png"/>
-					<Image IsVisible="{CompiledBinding IsQuestion}" Stretch="Uniform" Source="/Assets/MBIcons/Question_64.png"/>
-					<Image IsVisible="{CompiledBinding IsExclamation}" Stretch="Uniform" Source="/Assets/MBIcons/Exclamation_64.png"/>
+					<Image IsVisible="{Binding IsAsterisk}" Stretch="Uniform" Source="/Assets/MBIcons/Asterisk_64.png"/>
+					<Image IsVisible="{Binding IsError}" Stretch="Uniform" Source="/Assets/MBIcons/Error_64.png"/>
+					<Image IsVisible="{Binding IsQuestion}" Stretch="Uniform" Source="/Assets/MBIcons/Question_64.png"/>
+					<Image IsVisible="{Binding IsExclamation}" Stretch="Uniform" Source="/Assets/MBIcons/Exclamation_64.png"/>
 				</Panel>
 			
-				<TextBlock Margin="5,0,0,0" Name="messageTextBlock" MinHeight="45" MinWidth="193" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" Text="{CompiledBinding Message}" />
+				<TextBlock Margin="5,0,0,0" Name="messageTextBlock" MinHeight="45" MinWidth="193" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="12" Text="{Binding Message}" />
 
 			</StackPanel>
 		</DockPanel>
@@ -38,13 +40,13 @@
 		<DockPanel Height="45" Grid.Row="1" Background="{DynamicResource SystemChromeMediumLowColor}">
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5" DockPanel.Dock="Bottom">
 				<Button Grid.Column="0" MinWidth="75" MinHeight="28" Name="Button1" Click="Button1_Click" Margin="5">
-					<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{CompiledBinding Button1Text}"/>
+					<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Button1Text}"/>
 				</Button>
-				<Button Grid.Column="1" IsVisible="{CompiledBinding HasButton2}" MinWidth="75" MinHeight="28" Name="Button2" Click="Button2_Click" Margin="5">
-					<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{CompiledBinding Button2Text}"/>
+				<Button Grid.Column="1" IsVisible="{Binding HasButton2}" MinWidth="75" MinHeight="28" Name="Button2" Click="Button2_Click" Margin="5">
+					<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Button2Text}"/>
 				</Button>
-				<Button Grid.Column="2" IsVisible="{CompiledBinding HasButton3}" MinWidth="75" MinHeight="28" Name="Button3" Click="Button3_Click" Margin="5">
-					<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{CompiledBinding Button3Text}"/>
+				<Button Grid.Column="2" IsVisible="{Binding HasButton3}" MinWidth="75" MinHeight="28" Name="Button3" Click="Button3_Click" Margin="5">
+					<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Button3Text}"/>
 				</Button>
 			</StackPanel>
 		</DockPanel>

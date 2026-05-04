@@ -14,7 +14,7 @@ namespace LibationAvalonia.Dialogs;
 
 public partial class ThemePickerDialog : DialogWindow
 {
-	protected DataGridCollectionView ThemeColors { get; }
+	public AvaloniaList<ThemeItemColor> ThemeColors { get; }
 	private ChardonnayTheme ExistingTheme { get; } = ChardonnayTheme.GetLiveTheme();
 	private ChardonnayTheme WorkingTheme { get; set; }
 
@@ -38,7 +38,7 @@ public partial class ThemePickerDialog : DialogWindow
 		}
 	}
 
-	protected async Task ImportTheme()
+	public async Task ImportTheme()
 	{
 		try
 		{
@@ -74,7 +74,7 @@ public partial class ThemePickerDialog : DialogWindow
 		}
 	}
 
-	protected async Task ExportTheme()
+	public async Task ExportTheme()
 	{
 		try
 		{
@@ -110,22 +110,24 @@ public partial class ThemePickerDialog : DialogWindow
 		}
 	}
 
-	protected override void CancelAndClose()
+	public new void CancelAndClose()
 	{
 		ExistingTheme.ApplyTheme(ActualThemeVariant);
 		base.CancelAndClose();
 	}
 
-	protected void ResetColors()
+
+
+	public void ResetColors()
 		=> ResetTheme(ExistingTheme);
 
-	protected void LoadDefaultColors()
+	public void LoadDefaultColors()
 	{
 		if (App.DefaultThemeColors is ChardonnayTheme defaults)
 			ResetTheme(defaults);
 	}
 
-	protected override async Task SaveAndCloseAsync()
+	public new async Task SaveAndCloseAsync()
 	{
 		using (var themePersister = ChardonnayThemePersister.Create())
 		{
@@ -174,7 +176,7 @@ public partial class ThemePickerDialog : DialogWindow
 		WorkingTheme.ApplyTheme(ActualThemeVariant);
 	}
 
-	private class ThemeItemColor : ViewModels.ViewModelBase
+	public class ThemeItemColor : ViewModels.ViewModelBase
 	{
 		public required string ThemeItemName { get; init; }
 		public required Action<Color, string>? ColorSetter { get; set; }

@@ -5,6 +5,8 @@
         mc:Ignorable="d" d:DesignWidth="700" d:DesignHeight="450"
 		Width="700" Height="450"
         x:Class="LibationAvalonia.Dialogs.BookRecordsDialog"
+		xmlns:dialogs="clr-namespace:LibationAvalonia.Dialogs"
+		x:DataType="dialogs:BookRecordsDialog"
         Title="BookRecordsDialog">
 
 	<Grid RowDefinitions="*,Auto">
@@ -28,45 +30,52 @@
 			</DataGrid.Styles>
 
 			<DataGrid.Columns>
-
 				<DataGridCheckBoxColumn
 					Width="Auto"
 					IsReadOnly="False"
+					x:DataType="dialogs:BookRecordsDialog+BookRecordEntry"
 					Binding="{Binding IsChecked, Mode=TwoWay}"
 					Header="Checked"/>
 				<DataGridTextColumn
 					Width="Auto"
 					IsReadOnly="True"
+					x:DataType="dialogs:BookRecordsDialog+BookRecordEntry"
 					Binding="{Binding Type}"
 					Header="Type"/>
 				<DataGridTextColumn
 					Width="Auto"
 					IsReadOnly="True"
+					x:DataType="dialogs:BookRecordsDialog+BookRecordEntry"
 					Binding="{Binding Created}"
 					Header="Created"/>
 				<DataGridTextColumn
 					Width="Auto"
 					IsReadOnly="True"
+					x:DataType="dialogs:BookRecordsDialog+BookRecordEntry"
 					Binding="{Binding Start}"
 					Header="Start"/>
 				<DataGridTextColumn
 					Width="Auto"
 					IsReadOnly="True"
+					x:DataType="dialogs:BookRecordsDialog+BookRecordEntry"
 					Binding="{Binding Modified}"
 					Header="Modified"/>
 				<DataGridTextColumn
 					Width="Auto"
 					IsReadOnly="True"
+					x:DataType="dialogs:BookRecordsDialog+BookRecordEntry"
 					Binding="{Binding End}"
 					Header="End"/>
 				<DataGridTextColumn
 					Width="Auto"
 					IsReadOnly="True"
+					x:DataType="dialogs:BookRecordsDialog+BookRecordEntry"
 					Binding="{Binding Note}"
 					Header="Note"/>
 				<DataGridTextColumn
 					Width="Auto"
 					IsReadOnly="True"
+					x:DataType="dialogs:BookRecordsDialog+BookRecordEntry"
 					Binding="{Binding Title}"
 					Header="Title"/>
 

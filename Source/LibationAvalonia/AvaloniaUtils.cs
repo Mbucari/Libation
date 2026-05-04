@@ -24,7 +24,7 @@ internal static class AvaloniaUtils
 		: Task.FromResult(DialogResult.None);
 
 	public static Window GetParentWindow(this Control control)
-		=> control.GetVisualRoot() as Window ?? App.MainWindow
+		=> TopLevel.GetTopLevel(control) as Window ?? App.MainWindow
 		?? throw new InvalidOperationException("Cannot find parent window.");
 
 

@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:controls="clr-namespace:LibationAvalonia.Controls"
+			 xmlns:local="clr-namespace:LibationAvalonia.Views"
+			 x:DataType="local:SeriesViewGrid"
 			 xmlns:uibase="clr-namespace:LibationUiBase.SeriesView;assembly=LibationUiBase"
              x:Class="LibationAvalonia.Views.SeriesViewGrid">
 	
@@ -39,7 +41,7 @@
 						<Image
 							Tapped="Cover_Click"
 							Height="80"
-							Source="{CompiledBinding Cover}"
+							Source="{Binding Cover}"
 							ToolTip.Tip="Click to see full size" />
 					</DataTemplate>
 				</DataGridTemplateColumn.CellTemplate>
@@ -50,7 +52,7 @@
 					<DataTemplate x:DataType="uibase:SeriesItem">
 						<Panel>
 							<TextBlock
-								Text="{CompiledBinding Order}"
+								Text="{Binding Order}"
 								HorizontalAlignment="Center"
 								VerticalAlignment="Center" />
 						</Panel>
@@ -72,17 +74,17 @@
 								HorizontalAlignment="Stretch"
 								VerticalAlignment="Stretch"
 								Click="Availability_Click"
-								IsVisible="{CompiledBinding Button.HasButtonAction}"
-								IsEnabled="{CompiledBinding Button.Enabled}">
+								IsVisible="{Binding Button.HasButtonAction}"
+								IsEnabled="{Binding Button.Enabled}">
 								<TextBlock
-									Text="{CompiledBinding Button.DisplayText}"
+									Text="{Binding Button.DisplayText}"
 									TextAlignment="Center"
 									VerticalAlignment="Center" />
 							</Button>
 							<TextBlock
 								HorizontalAlignment="Center"
-								IsVisible="{CompiledBinding !Button.HasButtonAction}"
-								Text="{CompiledBinding Button.DisplayText}" />
+								IsVisible="{Binding !Button.HasButtonAction}"
+								Text="{Binding Button.DisplayText}" />
 						</Panel>
 					</DataTemplate>
 				</DataGridTemplateColumn.CellTemplate>
@@ -94,7 +96,7 @@
 						<Panel ToolTip.Tip="Open Audible product page">
 							<controls:LinkLabel
 								VerticalAlignment="Center"
-								Text="{CompiledBinding Title}"
+								Text="{Binding Title}"
 								Tapped="Title_Click" />
 						</Panel>
 					</DataTemplate>

@@ -9,6 +9,8 @@
 		MinHeight="135" MaxHeight="135"
 		MinWidth="550" MaxWidth="550"
 		Width="550" Height="135"
+		xmlns:dialogs="clr-namespace:LibationAvalonia.Dialogs"
+		x:DataType="dialogs:LiberatedStatusBatchAutoDialog"
 		WindowStartupLocation="CenterOwner">
  
 	<Grid Margin="10" RowDefinitions="Auto,Auto">

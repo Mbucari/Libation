@@ -47,9 +47,6 @@ public class App : Application
 			MessageBoxBase.ShowAsyncImpl = (owner, message, caption, buttons, icon, defaultButton, saveAndRestorePosition) =>
 				MessageBox.Show(owner as Window, message, caption, buttons, icon, defaultButton, saveAndRestorePosition);
 
-			// Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
-			// More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
-			DisableAvaloniaDataAnnotationValidation();
 			if (LibraryTask is null)
 			{
 				RunSetupIfNeededAsync(desktop, Configuration.Instance);
@@ -112,19 +109,6 @@ public class App : Application
 		LibationScaffolding.RunPostConfigMigrations(config);
 		// logging is init'd here
 		LibationScaffolding.RunPostMigrationScaffolding(Variety.Chardonnay, config);
-	}
-
-	private void DisableAvaloniaDataAnnotationValidation()
-	{
-		// Get an array of plugins to remove
-		DataAnnotationsValidationPlugin[] dataValidationPluginsToRemove =
-			BindingPlugins.DataValidators.OfType<DataAnnotationsValidationPlugin>().ToArray();
-
-		// remove each entry found
-		foreach (DataAnnotationsValidationPlugin? plugin in dataValidationPluginsToRemove)
-		{
-			BindingPlugins.DataValidators.Remove(plugin);
-		}
 	}
 
 	private static void ShowMainWindow(IClassicDesktopStyleApplicationLifetime desktop)

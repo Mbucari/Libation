@@ -8,7 +8,7 @@ namespace LibationAvalonia.Dialogs;
 
 public partial class LibationFilesDialog : DialogWindow, ILibationInstallLocation
 {
-	private class DirSelectOptions
+	public class DirSelectOptions
 	{
 		public List<Configuration.KnownDirectories> KnownDirectories { get; } = new()
 		{

@@ -8,6 +8,8 @@
 		Width="600" Height="450"
         x:Class="LibationAvalonia.Dialogs.MessageBoxAlertAdminDialog"
 		xmlns:controls="clr-namespace:LibationAvalonia.Controls"
+		xmlns:dialogs="clr-namespace:LibationAvalonia.Dialogs"
+		x:DataType="dialogs:MessageBoxAlertAdminDialog"
         Title="MessageBoxAlertAdminDialog"
 		WindowStartupLocation="CenterOwner">
 

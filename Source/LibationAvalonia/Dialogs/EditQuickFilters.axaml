@@ -16,7 +16,7 @@
 			CanUserSortColumns="False"
 			AutoGenerateColumns="False"
 			IsReadOnly="False"
-			ItemsSource="{CompiledBinding Filters}"
+			ItemsSource="{Binding Filters}"
 			GridLinesVisibility="All">
 			<DataGrid.Columns>
 
@@ -29,7 +29,7 @@
 								VerticalAlignment="Stretch"
 								HorizontalAlignment="Stretch"
 								HorizontalContentAlignment="Center"
-								IsEnabled="{CompiledBinding !IsDefault}"
+								IsEnabled="{Binding !IsDefault}"
 								Click="DeleteButton_Clicked" />
 
 						</DataTemplate>
@@ -39,13 +39,13 @@
 				<DataGridTextColumn
     				Width="*"
 				    IsReadOnly="False"
-				    Binding="{CompiledBinding Name, Mode=TwoWay}"
+				    Binding="{Binding Name, Mode=TwoWay}"
 				    Header="Name"/>
 
 				<DataGridTextColumn
 					Width="*"
 					IsReadOnly="False"
-					Binding="{CompiledBinding FilterString, Mode=TwoWay}"
+					Binding="{Binding FilterString, Mode=TwoWay}"
 					Header="Filter"/>
 
 				<DataGridTemplateColumn Header="Move&#xa;Up">
@@ -60,8 +60,8 @@
 								Click="MoveUpButton_Clicked">
 								<Button.IsEnabled>
 									<MultiBinding Converter="{x:Static BoolConverters.And}">
-										<CompiledBinding Path="!IsTop" />
-										<CompiledBinding Path="!IsDefault" />
+										<Binding Path="!IsTop" />
+										<Binding Path="!IsDefault" />
 									</MultiBinding>
 								</Button.IsEnabled>
 							</Button>
@@ -82,8 +82,8 @@
 								Click="MoveDownButton_Clicked">
 								<Button.IsEnabled>
 									<MultiBinding Converter="{x:Static BoolConverters.And}">
-										<CompiledBinding Path="!IsBottom" />
-										<CompiledBinding Path="!IsDefault" />
+										<Binding Path="!IsBottom" />
+										<Binding Path="!IsDefault" />
 									</MultiBinding>
 								</Button.IsEnabled>
 							</Button>

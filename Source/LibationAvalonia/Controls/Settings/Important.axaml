@@ -17,19 +17,19 @@
 			<StackPanel>
 				<TextBlock
 					Margin="5"
-					Text="{CompiledBinding BooksText}" />
+					Text="{Binding BooksText}" />
 
 				<controls:DirectoryOrCustomSelectControl Margin="0,10,0,10"
 									SubDirectory="Books"
-									Directory="{CompiledBinding BooksDirectory, Mode=TwoWay}"
-									KnownDirectories="{CompiledBinding KnownDirectories}" />
+									Directory="{Binding BooksDirectory, Mode=TwoWay}"
+									KnownDirectories="{Binding KnownDirectories}" />
 
-				<CheckBox IsChecked="{CompiledBinding SavePodcastsToParentFolder, Mode=TwoWay}">
-					<TextBlock Text="{CompiledBinding SavePodcastsToParentFolderText}" />
+				<CheckBox IsChecked="{Binding SavePodcastsToParentFolder, Mode=TwoWay}">
+					<TextBlock Text="{Binding SavePodcastsToParentFolderText}" />
 				</CheckBox>
 
-				<CheckBox IsChecked="{CompiledBinding OverwriteExisting, Mode=TwoWay}">
-					<TextBlock Text="{CompiledBinding OverwriteExistingText}" />
+				<CheckBox IsChecked="{Binding OverwriteExisting, Mode=TwoWay}">
+					<TextBlock Text="{Binding OverwriteExistingText}" />
 				</CheckBox>
 
 				<Grid
@@ -39,21 +39,21 @@
 					<TextBlock
 						VerticalAlignment="Center"
 						Margin="0,0,10,0"
-						Text="{CompiledBinding CreationTimeText}" />
+						Text="{Binding CreationTimeText}" />
 
 					<controls:WheelComboBox
 						Height="25"
 						Grid.Column="1"
 						Margin="0,5"
 						HorizontalContentAlignment="Stretch"
-						SelectedItem="{CompiledBinding CreationTime, Mode=TwoWay}"
-						ItemsSource="{CompiledBinding DateTimeSources}" />
+						SelectedItem="{Binding CreationTime, Mode=TwoWay}"
+						ItemsSource="{Binding DateTimeSources}" />
 
 					<TextBlock
 						VerticalAlignment="Center"
 						Grid.Row="1"
 						Margin="0,0,10,0"
-						Text="{CompiledBinding LastWriteTimeText}" />
+						Text="{Binding LastWriteTimeText}" />
 
 					<controls:WheelComboBox
 						Height="25"
@@ -61,8 +61,8 @@
 						Grid.Column="1"
 						Margin="0,5"
 						HorizontalContentAlignment="Stretch"
-						SelectedItem="{CompiledBinding LastWriteTime, Mode=TwoWay}"
-						ItemsSource="{CompiledBinding DateTimeSources}" />
+						SelectedItem="{Binding LastWriteTime, Mode=TwoWay}"
+						ItemsSource="{Binding DateTimeSources}" />
 
 				</Grid>
 
@@ -72,16 +72,16 @@
 		<CheckBox
 			Grid.Row="1"
 			Margin="10,5"
-			IsEnabled="{CompiledBinding !UseWebViewSettingDisabled}"
-			IsChecked="{CompiledBinding UseWebView, Mode=TwoWay}">
+			IsEnabled="{Binding !UseWebViewSettingDisabled}"
+			IsChecked="{Binding UseWebView, Mode=TwoWay}">
 			<StackPanel>
-				<TextBlock Text="{CompiledBinding UseWebViewText}" />
+				<TextBlock Text="{Binding UseWebViewText}" />
 				<TextBlock
-					IsVisible="{CompiledBinding UseWebViewSettingDisabled}"
+					IsVisible="{Binding UseWebViewSettingDisabled}"
 					FontStyle="Italic"
 					Opacity="0.8"
 					Margin="0,2,0,0"
-					Text="{CompiledBinding UseWebViewSnapMessage}" />
+					Text="{Binding UseWebViewSnapMessage}" />
 			</StackPanel>
 		</CheckBox>
 
@@ -98,15 +98,15 @@
 				Width="120"
 				Height="25"
 				HorizontalContentAlignment="Stretch"
-				SelectedItem="{CompiledBinding LoggingLevel, Mode=TwoWay}"
-				ItemsSource="{CompiledBinding LoggingLevels}" />
+				SelectedItem="{Binding LoggingLevel, Mode=TwoWay}"
+				ItemsSource="{Binding LoggingLevels}" />
 
 			<Button
 				Margin="50,0,0,0"
 				Padding="20,0"
 				VerticalAlignment="Stretch"
 				Content="Open Log Folder"
-				Command="{CompiledBinding OpenLogFolderButton}" />
+				Command="{Binding OpenLogFolderButton}" />
 
 		</StackPanel>
 
@@ -121,12 +121,12 @@
 				<TextBlock
 					Margin="0,0,10,0"
 					VerticalAlignment="Center"
-					Text="{CompiledBinding GridScaleFactorText}"/>
+					Text="{Binding GridScaleFactorText}"/>
 
 				<Slider
 					Grid.Column="1"
 					Width="200"
-					Value="{CompiledBinding GridScaleFactor, Mode=TwoWay}"
+					Value="{Binding GridScaleFactor, Mode=TwoWay}"
 					VerticalAlignment="Center"
 					Minimum="-100"
 					Maximum="100"
@@ -139,13 +139,13 @@
 					Margin="0,0,10,0"
 					Grid.Row="1"
 					VerticalAlignment="Center"
-					Text="{CompiledBinding GridFontScaleFactorText}"/>
+					Text="{Binding GridFontScaleFactorText}"/>
 
 				<Slider
 					Grid.Column="1"
 					Grid.Row="1"
 					Width="200"
-					Value="{CompiledBinding GridFontScaleFactor, Mode=TwoWay}"
+					Value="{Binding GridFontScaleFactor, Mode=TwoWay}"
 					VerticalAlignment="Center"
 					Minimum="-100"
 					Maximum="100"
@@ -161,7 +161,7 @@
 					Padding="20,0"
 					VerticalAlignment="Stretch"
 					Content="Apply Display Settings"
-					Command="{CompiledBinding ApplyDisplaySettings}"/>
+					Command="{Binding ApplyDisplaySettings}"/>
 			</Grid>
 		</controls:GroupBox>
 
@@ -181,8 +181,8 @@
 				Name="ThemeComboBox"
 				Grid.Column="1"
 				MinWidth="80"
-				SelectedItem="{CompiledBinding ThemeVariant, Mode=TwoWay}"
-				ItemsSource="{CompiledBinding Themes}"/>
+				SelectedItem="{Binding ThemeVariant, Mode=TwoWay}"
+				ItemsSource="{Binding Themes}"/>
 			
 			<Button
 				Grid.Column="2"

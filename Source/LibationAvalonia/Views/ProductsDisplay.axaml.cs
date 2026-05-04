@@ -33,10 +33,10 @@ public partial class ProductsDisplay : UserControl
 
 
 	public static readonly StyledProperty<bool> DisableContextMenuProperty =
-	AvaloniaProperty.Register<GroupBox, bool>(nameof(DisableContextMenu));
+	AvaloniaProperty.Register<Controls.GroupBox, bool>(nameof(DisableContextMenu));
 
 	public static readonly StyledProperty<bool> DisableColumnCustomizationProperty =
-	AvaloniaProperty.Register<GroupBox, bool>(nameof(DisableColumnCustomization));
+	AvaloniaProperty.Register<Controls.GroupBox, bool>(nameof(DisableColumnCustomization));
 
 	public bool DisableContextMenu
 	{
@@ -495,7 +495,7 @@ public partial class ProductsDisplay : UserControl
 		#endregion
 		#region View Bookmarks/Clips (Single book only)
 
-		if (entries.Length == 1 && entries[0] is LibraryBookEntry entry3 && VisualRoot is Window window)
+		if (entries.Length == 1 && entries[0] is LibraryBookEntry entry3 && this.GetParentWindow() is Window window)
 		{
 			args.ContextMenuItems.Add(new MenuItem
 			{
@@ -658,7 +658,7 @@ public partial class ProductsDisplay : UserControl
 		var pictureId = gEntry.LibraryBook.Book.PictureLarge ?? gEntry.LibraryBook.Book.PictureId;
 		if (string.IsNullOrEmpty(pictureId))
 		{
-			await MessageBox.Show(VisualRoot as Window, "No cover art is available for this book.", "No Cover Art", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			await MessageBox.Show(this.GetParentWindow(), "No cover art is available for this book.", "No Cover Art", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			return;
 		}
 

@@ -49,26 +49,26 @@
 
 		<Grid Grid.Row="1" RowDefinitions="Auto,Auto,*">
 			<TextBlock Text="STRING FIELDS" />
-			<TextBlock Grid.Row="1" Text="{CompiledBinding StringUsage}" />
-			<ListBox Grid.Row="2" DoubleTapped="ListBox_DoubleTapped" ItemsSource="{CompiledBinding StringFields}"/>
+			<TextBlock Grid.Row="1" Text="{Binding StringUsage}" />
+			<ListBox Grid.Row="2" DoubleTapped="ListBox_DoubleTapped" ItemsSource="{Binding StringFields}"/>
 		</Grid>
 
 		<Grid Grid.Row="1" Grid.Column="1" RowDefinitions="Auto,Auto,*">
 			<TextBlock Text="NUMBER FIELDS" />
-			<TextBlock Grid.Row="1" Text="{CompiledBinding NumberUsage}" />
-			<ListBox Grid.Row="2" DoubleTapped="ListBox_DoubleTapped" ItemsSource="{CompiledBinding NumberFields}"/>
+			<TextBlock Grid.Row="1" Text="{Binding NumberUsage}" />
+			<ListBox Grid.Row="2" DoubleTapped="ListBox_DoubleTapped" ItemsSource="{Binding NumberFields}"/>
 		</Grid>
 
 		<Grid Grid.Row="1" Grid.Column="2" RowDefinitions="Auto,Auto,*">
 			<TextBlock Text="BOOLEAN (TRUE/FALSE) FIELDS" />
-			<TextBlock Grid.Row="1" Text="{CompiledBinding BoolUsage}" />
-			<ListBox Grid.Row="2" DoubleTapped="ListBox_DoubleTapped" ItemsSource="{CompiledBinding BoolFields}"/>
+			<TextBlock Grid.Row="1" Text="{Binding BoolUsage}" />
+			<ListBox Grid.Row="2" DoubleTapped="ListBox_DoubleTapped" ItemsSource="{Binding BoolFields}"/>
 		</Grid>
 
 		<Grid Grid.Row="1" Grid.Column="3" RowDefinitions="Auto,Auto,*">
 			<TextBlock Text="ID FIELDS" />
-			<TextBlock Grid.Row="1" Text="{CompiledBinding IdUsage}" />
-			<ListBox Grid.Row="2" DoubleTapped="ListBox_DoubleTapped" ItemsSource="{CompiledBinding IdFields}"/>
+			<TextBlock Grid.Row="1" Text="{Binding IdUsage}" />
+			<ListBox Grid.Row="2" DoubleTapped="ListBox_DoubleTapped" ItemsSource="{Binding IdFields}"/>
 		</Grid>		
 	</Grid>
 </Window>

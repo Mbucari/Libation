@@ -19,10 +19,10 @@
 		CanUserSortColumns="True"
 		AutoGenerateColumns="False"
 		IsReadOnly="True"
-		ItemsSource="{CompiledBinding Books}">
+		ItemsSource="{Binding Books}">
 		  <DataGrid.Styles>
 			  <Style x:DataType="vm:BookDataViewModel" Selector="DataGridRow">
-				  	<Setter Property="Background" Value="{CompiledBinding ScanStatus, Converter={x:Static dialogs:FindBetterQualityBooksDialog.RowConverter }}" />
+				  	<Setter Property="Background" Value="{Binding ScanStatus, Converter={x:Static dialogs:FindBetterQualityBooksDialog.RowConverter }}" />
 			  </Style>
 		  </DataGrid.Styles>
 		  <DataGrid.Columns>
@@ -30,51 +30,51 @@
 				<DataGridTextColumn
     				Width="120"
 				    IsReadOnly="False"
-				    Binding="{CompiledBinding Asin}"
+				    Binding="{Binding Asin}"
 				    Header="ASIN"/>
 
 				<DataGridTextColumn
     				Width="120"
 				    IsReadOnly="True"
-				    Binding="{CompiledBinding Title}"
+				    Binding="{Binding Title}"
 				    Header="Title"/>
 
 				<DataGridTextColumn
     				Width="120"
 				    IsReadOnly="True"
-				    Binding="{CompiledBinding FoundFile}"
+				    Binding="{Binding FoundFile}"
 				    Header="Best Found File"/>
 
 				<DataGridTextColumn
     				Width="90"
 				    IsReadOnly="True"
-				    Binding="{CompiledBinding Codec}"
+				    Binding="{Binding Codec}"
 				    Header="Existing&#xa;Codec"/>
 
 				<DataGridTextColumn
     				Width="90"
 				    IsReadOnly="True"
 					SortMemberPath="Bitrate"
-				    Binding="{CompiledBinding BitrateString}"
+				    Binding="{Binding BitrateString}"
 				    Header="Existing&#xa;Bitrate"/>
 
 				<DataGridTextColumn
     				Width="90"
 				    IsReadOnly="True"
-				    Binding="{CompiledBinding AvailableCodec}"
+				    Binding="{Binding AvailableCodec}"
 				    Header="Available&#xa;Codec"/>
 
 				<DataGridTextColumn
     				Width="90"
 				    IsReadOnly="True"
 					SortMemberPath="AvailableBitrate"
-				    Binding="{CompiledBinding AvailableBitrateString}"
+				    Binding="{Binding AvailableBitrateString}"
 				    Header="Available&#xa;Bitrate"/>
 
 			  <DataGridCheckBoxColumn
     				Width="90"
 				    IsReadOnly="True"
-					Binding="{CompiledBinding IsSignificant}"
+					Binding="{Binding IsSignificant}"
 				    Header="Significantly&#xa;Greater?"/>
 
           </DataGrid.Columns>

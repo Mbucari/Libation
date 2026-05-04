@@ -7,6 +7,8 @@
 		Width="450" Height="540"
         x:Class="LibationAvalonia.Dialogs.AboutDialog"
 		xmlns:controls="clr-namespace:LibationAvalonia.Controls"
+		xmlns:dialogs="clr-namespace:LibationAvalonia.Dialogs"
+		x:DataType="dialogs:AboutVM"
         Title="About Libation">
 	
 	<Grid Margin="10" RowDefinitions="Auto,Auto,Auto,Auto,*">

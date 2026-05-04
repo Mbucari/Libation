@@ -18,29 +18,29 @@
 			</Style>
 		</StackPanel.Styles>
 
-		<CheckBox IsChecked="{CompiledBinding AutoScan, Mode=TwoWay}">
-			<TextBlock Text="{CompiledBinding AutoScanText}" />
+		<CheckBox IsChecked="{Binding AutoScan, Mode=TwoWay}">
+			<TextBlock Text="{Binding AutoScanText}" />
 		</CheckBox>
 
-		<CheckBox IsChecked="{CompiledBinding ShowImportedStats, Mode=TwoWay}">
-			<TextBlock Text="{CompiledBinding ShowImportedStatsText}" />
+		<CheckBox IsChecked="{Binding ShowImportedStats, Mode=TwoWay}">
+			<TextBlock Text="{Binding ShowImportedStatsText}" />
 		</CheckBox>
 
-		<CheckBox IsChecked="{CompiledBinding ImportEpisodes, Mode=TwoWay}">
-			<TextBlock Text="{CompiledBinding ImportEpisodesText}" />
+		<CheckBox IsChecked="{Binding ImportEpisodes, Mode=TwoWay}">
+			<TextBlock Text="{Binding ImportEpisodesText}" />
 		</CheckBox>
 
-		<CheckBox IsChecked="{CompiledBinding ImportPlusTitles, Mode=TwoWay}"
-				  ToolTip.Tip="{CompiledBinding ImportPlusTitlesTip}">
-			<TextBlock Text="{CompiledBinding ImportPlusTitlesText}" />
+		<CheckBox IsChecked="{Binding ImportPlusTitles, Mode=TwoWay}"
+				  ToolTip.Tip="{Binding ImportPlusTitlesTip}">
+			<TextBlock Text="{Binding ImportPlusTitlesText}" />
 		</CheckBox>
 
-		<CheckBox IsChecked="{CompiledBinding DownloadEpisodes, Mode=TwoWay}">
-			<TextBlock Text="{CompiledBinding DownloadEpisodesText}" />
+		<CheckBox IsChecked="{Binding DownloadEpisodes, Mode=TwoWay}">
+			<TextBlock Text="{Binding DownloadEpisodesText}" />
 		</CheckBox>
 
-		<CheckBox IsChecked="{CompiledBinding AutoDownloadEpisodes, Mode=TwoWay}">
-			<TextBlock Text="{CompiledBinding AutoDownloadEpisodesText}" />
+		<CheckBox IsChecked="{Binding AutoDownloadEpisodes, Mode=TwoWay}">
+			<TextBlock Text="{Binding AutoDownloadEpisodesText}" />
 		</CheckBox>
 	</StackPanel>
 </UserControl>

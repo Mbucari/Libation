@@ -202,7 +202,7 @@ public partial class BookRecordsDialog : DialogWindow
 
 	#region DataGrid Bindings
 
-	private class BookRecordEntry : ViewModels.ViewModelBase
+	public class BookRecordEntry : ViewModels.ViewModelBase
 	{
 		private const string DateFormat = "yyyy-MM-dd HH\\:mm";
 		public IRecord Record { get; }

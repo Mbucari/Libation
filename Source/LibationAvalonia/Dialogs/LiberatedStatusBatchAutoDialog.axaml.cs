@@ -11,4 +11,8 @@ public partial class LiberatedStatusBatchAutoDialog : DialogWindow
 		DataContext = this;
 		ControlToFocusOnShow = SaveButton;
 	}
+
+	// For compiled bindings
+	public new void SaveAndClose() => base.SaveAndClose();
+
 }

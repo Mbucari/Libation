@@ -46,7 +46,7 @@ public partial class DescriptionDisplayDialog : Window
 		this.Position = new PixelPoint((int)SpawnLocation.X, (int)Math.Min(SpawnLocation.Y, workingHeight - DescriptionTextBox.DesiredSize.Height));
 	}
 
-	private void DescriptionTextBox_LostFocus(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+	private void DescriptionTextBox_LostFocus(object sender, Avalonia.Input.FocusChangedEventArgs e)
 	{
 		Close();
 	}

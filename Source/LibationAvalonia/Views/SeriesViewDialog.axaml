@@ -3,11 +3,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		xmlns:local="clr-namespace:LibationAvalonia.Views"
         x:Class="LibationAvalonia.Views.SeriesViewDialog"
+		x:DataType="local:SeriesViewDialog"
         Title="View All Items in Series">
 	
 	<TabControl
-		ItemsSource="{Binding	TabItems}"
+		ItemsSource="{Binding TabItems}"
 		VerticalAlignment="Stretch"
 		HorizontalAlignment="Stretch">
 		<TabControl.Styles>
