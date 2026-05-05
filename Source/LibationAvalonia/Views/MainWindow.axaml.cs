@@ -25,7 +25,6 @@ public partial class MainWindow : ReactiveWindow<MainVM>
 		if (Design.IsDesignMode)
 			Configuration.CreateMockInstance();
 
-		DataContext = new MainVM(this);
 		ApiExtended.LoginChoiceFactory = account => Dispatcher.UIThread.Invoke(() => new Dialogs.Login.AvaloniaLoginChoiceEager(account));
 
 		AudibleApiStorage.LoadError += AudibleApiStorage_LoadError;
@@ -46,6 +45,7 @@ public partial class MainWindow : ReactiveWindow<MainVM>
 
 		Configuration.Instance.PropertyChanged += Settings_PropertyChanged;
 		Settings_PropertyChanged(this, null);
+		DataContext = new MainVM(this);
 	}
 
 	[Dinah.Core.PropertyChangeFilter(nameof(Configuration.Books))]

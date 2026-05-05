@@ -216,7 +216,7 @@ public static partial class CommonFormatters
 	public static string Unescape(ReadOnlySpan<char> valueSpan, ReadOnlySpan<char> quoteChars, bool unquoteBackslash = true, bool unescapeDoubleQuotesInsideQuotes = true)
 	{
 		if (valueSpan.IsEmpty) return "";
-		
+
 		Span<char> search = stackalloc char[quoteChars.Length + 1];
 		search[0] = '\\';
 		quoteChars.CopyTo(search[1..]);
@@ -245,8 +245,8 @@ public static partial class CommonFormatters
 					{
 						i++; // skip
 						if (!unescapeDoubleQuotesInsideQuotes ||
-						    i >= valueSpan.Length ||
-						    valueSpan[i] != c)
+							i >= valueSpan.Length ||
+							valueSpan[i] != c)
 							// end block if no 2nd quote follows or doubled quotes don't have special meaning 
 							break;
 					}

@@ -307,7 +307,8 @@ public partial class ConditionalTagCollection<TClass>(bool caseSensitive = true)
 				{
 					var cmp = GetStringComparer(culture);
 					return e1.OrderBy(e => e, cmp).SequenceEqual(e2.OrderBy(e => e, cmp), cmp);
-				},
+				}
+				,
 				_ => throw new ArgumentOutOfRangeException() // this should never happen because the regex only allows these values
 			};
 			return (v1, v2, culture) => v1 is not null && v2 is not null && checklist(ToEnumerable(v1), ToEnumerable(v2), culture);
@@ -386,7 +387,7 @@ public partial class ConditionalTagCollection<TClass>(bool caseSensitive = true)
 		{
 			return StringComparer.Create(culture ?? CultureInfo.CurrentCulture, ignoreCase: true);
 		}
-		
+
 		/// <summary>
 		/// Build a regular expression check. Uses culture-invariant matching for thread-safety and consistency.
 		/// Applies a timeout to prevent regex patterns from causing excessive backtracking and blocking.

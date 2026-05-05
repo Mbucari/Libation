@@ -26,7 +26,7 @@ partial class MainVM
 	private void Configure_Filters()
 	{
 		FirstFilterIsDefault = QuickFilters.UseDefault;
-		MainWindow.Initialized += updateFiltersMenu;
+		MainWindow.Loaded += updateFiltersMenu;
 		QuickFilters.Updated += updateFiltersMenu;
 
 		//We need to be able to dynamically add and remove menu items from the Quick Filters menu.

@@ -21,9 +21,8 @@ public abstract class DialogWindow : Window
 	{
 		SaveAndRestorePosition = saveAndRestorePosition;
 		KeyDown += DialogWindow_KeyDown;
-		Initialized += DialogWindow_Initialized;
-		Opened += DialogWindow_Opened;
 		Loaded += DialogWindow_Loaded;
+		Opened += DialogWindow_Opened;
 		Closing += DialogWindow_Closing;
 
 		if (Design.IsDesignMode)
@@ -38,12 +37,6 @@ public abstract class DialogWindow : Window
 		}
 	}
 
-	private void DialogWindow_Loaded(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-	{
-		if (!CanResize)
-			this.HideMinMaxBtns();
-	}
-
 	protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
 	{
 		base.OnApplyTemplate(e);
@@ -51,12 +44,14 @@ public abstract class DialogWindow : Window
 		if (MinHeight == MaxHeight && MinWidth == MaxWidth)
 		{
 			CanResize = false;
+			CanMinimize = false;
+			CanMaximize = false;
 			Height = MinHeight;
 			Width = MinWidth;
 		}
 	}
 
-	private void DialogWindow_Initialized(object? sender, EventArgs e)
+	private void DialogWindow_Loaded(object? sender, EventArgs e)
 	{
 		this.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 		if (SaveAndRestorePosition)

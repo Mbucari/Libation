@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:controls="clr-namespace:HangoverAvalonia.Controls"
+		xmlns:vms="clr-namespace:HangoverAvalonia.ViewModels"
+		x:DataType="vms:MainVM"
 		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500"
 		Width="800" Height="500"
         x:Class="HangoverAvalonia.Views.MainWindow"

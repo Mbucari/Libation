@@ -5,6 +5,8 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:views="clr-namespace:LibationAvalonia.Views"
 	xmlns:viewModels="clr-namespace:LibationAvalonia.ViewModels"
+	xmlns:vmbase="clr-namespace:LibationUiBase.ProcessQueue;assembly=LibationUiBase"
+	x:DataType="vmbase:ProcessQueueViewModel"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="650"
 	Background="{DynamicResource SystemRegionColor}"

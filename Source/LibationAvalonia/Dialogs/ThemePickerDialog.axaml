@@ -6,6 +6,8 @@
 		Width="965" Height="850"
 		x:Class="LibationAvalonia.Dialogs.ThemePickerDialog"
 		xmlns:controls="clr-namespace:LibationAvalonia.Controls"
+		xmlns:dialogs="clr-namespace:LibationAvalonia.Dialogs"
+		x:DataType="dialogs:ThemePickerDialog"
 		Title="Theme Editor">
 	
 	<Grid ColumnDefinitions="Auto,*">

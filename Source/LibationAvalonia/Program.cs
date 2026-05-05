@@ -89,7 +89,7 @@ static class Program
 			return AppBuilder.Configure<App>()
 				.UsePlatformDetect()
 				.LogToTrace()
-				.UseReactiveUI()
+				.UseReactiveUI(_ => { })
 				.AfterSetup(_ => SetupLock.Exit());
 		}
 	}

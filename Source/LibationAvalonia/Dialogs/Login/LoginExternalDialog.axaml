@@ -8,6 +8,8 @@
 		CanResize="True"
 		WindowStartupLocation="CenterOwner"
         x:Class="LibationAvalonia.Dialogs.Login.LoginExternalDialog"
+		xmlns:login="clr-namespace:LibationAvalonia.Dialogs.Login"
+		x:DataType="login:LoginExternalDialog"
         Title="Audible Login External">
 
 	<Grid RowDefinitions="Auto,Auto,2*,Auto,*" ColumnDefinitions="*" Margin="5">

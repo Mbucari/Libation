@@ -8,20 +8,20 @@ public static class WindowsDirectory
 	const int FolderIconMaxAttempts = 5;
 
 	public static void SetCoverAsFolderIcon(string? pictureId, string directory, CancellationToken cancellationToken)
-    {
-        //Currently only works for Windows and macOS
-        if (!Configuration.Instance.UseCoverAsFolderIcon)
+	{
+		//Currently only works for Windows and macOS
+		if (!Configuration.Instance.UseCoverAsFolderIcon)
 			return;
 		if (string.IsNullOrEmpty(pictureId))
 		{
 			Serilog.Log.Logger.Warning("No picture ID provided to set cover art as folder icon. {@DebugInfo}", new { directory });
 			return;
-        }
+		}
 
-        // Load JPEG bytes from Images cache (or download). Prefer bytes → ICO so we never depend on a
-        // path that might not exist when Amazon omits Content-Length or another downloader left a stale cache entry.
+		// Load JPEG bytes from Images cache (or download). Prefer bytes → ICO so we never depend on a
+		// path that might not exist when Amazon omits Content-Length or another downloader left a stale cache entry.
 
-        for (var attempt = 1; attempt <= FolderIconMaxAttempts; attempt++)
+		for (var attempt = 1; attempt <= FolderIconMaxAttempts; attempt++)
 		{
 			cancellationToken.ThrowIfCancellationRequested();
 

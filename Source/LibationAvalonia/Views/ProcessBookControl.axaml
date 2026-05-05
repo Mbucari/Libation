@@ -16,7 +16,7 @@
 			<Setter Property="IsVisible" Value="True" />
 		</Style>
 		<Style Selector="views|ProcessBookControl">
-			<Setter Property="ProcessBookStatus" Value="{CompiledBinding Status}" />
+			<Setter Property="ProcessBookStatus" Value="{Binding Status}" />
 			<Style Selector="^[ProcessBookStatus=Cancelled]">
 				<Setter Property="Background" Value="{DynamicResource ProcessQueueBookCancelledBrush}" />
 			</Style>
@@ -34,13 +34,13 @@
 		<Grid ColumnDefinitions="Auto,*,Auto">
 
 			<Panel Grid.Column="0" Margin="3" Width="80" Height="80" HorizontalAlignment="Left">
-				<Image Width="80" Height="80" Source="{CompiledBinding Cover}" Stretch="Uniform" />
+				<Image Width="80" Height="80" Source="{Binding Cover}" Stretch="Uniform" />
 			</Panel>
 			<Grid Margin="0,3,0,3" Grid.Column="1" ColumnDefinitions="*" RowDefinitions="*,16">
 				<StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical">
-					<TextBlock ClipToBounds="True" TextWrapping="Wrap" FontSize="11" Text="{CompiledBinding Title}" />
-					<TextBlock FontSize="10" TextWrapping="NoWrap" Text="{CompiledBinding Author}" />
-					<TextBlock FontSize="10" TextWrapping="NoWrap" Text="{CompiledBinding Narrator}" />
+					<TextBlock ClipToBounds="True" TextWrapping="Wrap" FontSize="11" Text="{Binding Title}" />
+					<TextBlock FontSize="10" TextWrapping="NoWrap" Text="{Binding Author}" />
+					<TextBlock FontSize="10" TextWrapping="NoWrap" Text="{Binding Narrator}" />
 				</StackPanel>
 				<Panel Grid.Column="0" Grid.Row="1">
 					<Panel.Styles>
@@ -48,8 +48,8 @@
 							<Setter Property="MinWidth" Value="20" />
 						</Style>
 					</Panel.Styles>
-					<ProgressBar IsVisible="{CompiledBinding IsDownloading}" Value="{CompiledBinding Progress}" ShowProgressText="True" FontSize="12" />
-					<TextBlock IsVisible="{CompiledBinding !IsDownloading}" Text="{CompiledBinding StatusText}"/>
+					<ProgressBar IsVisible="{Binding IsDownloading}" Value="{Binding Progress}" ShowProgressText="True" FontSize="12" />
+					<TextBlock IsVisible="{Binding !IsDownloading}" Text="{Binding StatusText}"/>
 				</Panel>
 			</Grid>
 			<Grid Name="ButtonsGrid" Margin="3" Grid.Column="2" HorizontalAlignment="Right" ColumnDefinitions="Auto,Auto">
@@ -64,7 +64,7 @@
 						</Style>
 					</Style>
 				</Grid.Styles>
-				<StackPanel IsVisible="{CompiledBinding Queued}" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Vertical">
+				<StackPanel IsVisible="{Binding Queued}" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Vertical">
 
 					<Button ToolTip.Tip="Move book to top of queue" Click="MoveFirst_Click">
 						<Path VerticalAlignment="Top" Data="{StaticResource	FirstButtonIcon}" />
@@ -79,14 +79,14 @@
 						<Path VerticalAlignment="Bottom" Data="{StaticResource	LastButtonIcon}" />
 					</Button>
 				</StackPanel>
-				<Panel Margin="3,0,0,0" Grid.Column="1" VerticalAlignment="Top" IsVisible="{CompiledBinding !IsFinished}">
+				<Panel Margin="3,0,0,0" Grid.Column="1" VerticalAlignment="Top" IsVisible="{Binding !IsFinished}">
 					<Button Height="32" Background="{DynamicResource CancelRed}" Width="22" CornerRadius="11" Click="Cancel_Click">
 						<Path Fill="{DynamicResource SystemAltHighColor}" VerticalAlignment="Center" Data="{StaticResource CancelButtonIcon}" RenderTransform="{StaticResource Rotate45Transform}" />
 					</Button>
 				</Panel>
 			</Grid>
 			<Panel Margin="3" Width="50" Grid.Column="2">
-				<TextPresenter FontSize="9" VerticalAlignment="Bottom" HorizontalAlignment="Right" IsVisible="{CompiledBinding IsDownloading}" Text="{CompiledBinding ETA}" />
+				<TextPresenter FontSize="9" VerticalAlignment="Bottom" HorizontalAlignment="Right" IsVisible="{Binding IsDownloading}" Text="{Binding ETA}" />
 			</Panel>
 
 		</Grid>

@@ -8,6 +8,8 @@
 		Width="800" Height="165"
         x:Class="LibationAvalonia.Dialogs.LibationFilesDialog"
         xmlns:controls="clr-namespace:LibationAvalonia.Controls"
+		xmlns:dialogs="clr-namespace:LibationAvalonia.Dialogs"
+		x:DataType="dialogs:LibationFilesDialog+DirSelectOptions"
 		WindowStartupLocation="CenterScreen"
         Title="Book Details">
 	

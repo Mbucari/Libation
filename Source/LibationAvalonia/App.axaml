@@ -89,7 +89,7 @@
 		</Style>
 
 		<Style Selector="dialogs|DialogWindow">
-			<Setter Property="SystemDecorations" Value="Full"/>
+			<Setter Property="WindowDecorations" Value="Full"/>
 			<Setter Property="Icon" Value="/Assets/libation.ico"/>
 			<Setter Property="Template">
 				<ControlTemplate>

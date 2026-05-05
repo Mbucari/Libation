@@ -189,7 +189,7 @@ public class MessageBox
 					IsVisible = false,
 					Height = 1,
 					Width = 1,
-					SystemDecorations = SystemDecorations.None,
+					WindowDecorations = WindowDecorations.None,
 					ShowInTaskbar = false
 				};
 

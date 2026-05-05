@@ -5,6 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="650"
 		     xmlns:views="clr-namespace:LibationAvalonia.Views"
 		     xmlns:controls="clr-namespace:LibationAvalonia.Controls"
+			 x:DataType="controls:ThemePreviewControl"
              x:Class="LibationAvalonia.Controls.ThemePreviewControl">
 	<Grid RowDefinitions="Auto,Auto,*">
 		<controls:GroupBox>

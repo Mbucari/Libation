@@ -4,6 +4,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         Width="800" Height="450"
+		xmlns:dialogs="clr-namespace:LibationAvalonia.Dialogs"
+		x:DataType="dialogs:AccountsDialog"
         x:Class="LibationAvalonia.Dialogs.AccountsDialog"
         Title="Audible Accounts">
 	<Grid RowDefinitions="*,Auto">

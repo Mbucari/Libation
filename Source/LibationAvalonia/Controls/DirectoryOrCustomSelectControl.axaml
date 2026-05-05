@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:LibationAvalonia.Controls"
+             x:DataType="controls:DirectoryOrCustomSelectControl"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LibationAvalonia.Controls.DirectoryOrCustomSelectControl">
 	
@@ -39,7 +40,7 @@
             Margin="0,0,0,8"
             Name="tboxKnownDirPath"
             IsEnabled="{Binding #rbKnown.IsChecked}"
-            Text="{Binding #cmbKnownDirs.SelectedItem.Directory}" />
+            Text="{Binding #cmbKnownDirs.((controls:KnownDirectoryItem)SelectedItem).Directory}"/>
 
         
         <RadioButton
@@ -53,7 +54,7 @@
             Name="tboxCustomDirPath"
             Margin="0,0,10,0"
             VerticalAlignment="Center"
-            Text="{Binding $parent[1].Directory, Mode=OneWayToSource}"
+            Text="{Binding $parent[controls:DirectoryOrCustomSelectControl].Directory, Mode=OneWayToSource}"
             IsEnabled="{Binding #rbCustom.IsChecked}"/>
 
         <Button

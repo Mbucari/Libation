@@ -34,7 +34,7 @@
 			DisableContextMenu="True"
 			DisableColumnCustomization="True"
 			IsEnabled="{Binding $parent.((dialogs:TrashBinViewModel)DataContext).ControlsEnabled}"
-			DataContext="{Binding ProductsDisplay}" />
+			DataContext="{Binding ProductsDisplay, Mode=OneTime}" />
 
 		<Grid
 			Margin="0,5,0,0"

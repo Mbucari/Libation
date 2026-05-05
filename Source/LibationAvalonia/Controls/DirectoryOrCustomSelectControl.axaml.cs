@@ -124,57 +124,54 @@ public partial class DirectoryOrCustomSelectControl : UserControl
 
 	public async void Browse_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
 	{
-		if (VisualRoot is not Window window)
-			return;
-
 		var options = new FolderPickerOpenOptions
 		{
 			AllowMultiple = false
 		};
 
-		var selectedFolders = await window.StorageProvider.OpenFolderPickerAsync(options);
+		var selectedFolders = await this.GetParentWindow().StorageProvider.OpenFolderPickerAsync(options);
 		Directory = selectedFolders.SingleOrDefault()?.TryGetLocalPath() ?? Directory;
 	}
+}
 
-	private class KnownDirectoryItem : ReactiveObject
+public class KnownDirectoryItem : ReactiveObject
+{
+	public Configuration.KnownDirectories KnownDirectory { get; set; }
+	public string? Directory { get => field; set => this.RaiseAndSetIfChanged(ref field, value); }
+	public string? Name { get; }
+	public string? SubDirectory
 	{
-		public Configuration.KnownDirectories KnownDirectory { get; set; }
-		public string? Directory { get => field; set => this.RaiseAndSetIfChanged(ref field, value); }
-		public string? Name { get; }
-		public string? SubDirectory
+		get => field;
+		set
 		{
-			get => field;
-			set
+			field = value;
+			if (Configuration.GetKnownDirectoryPath(KnownDirectory) is string dir)
 			{
-				field = value;
-				if (Configuration.GetKnownDirectoryPath(KnownDirectory) is string dir)
-				{
-					Directory = Path.Combine(dir, field ?? "");
-				}
+				Directory = Path.Combine(dir, field ?? "");
 			}
 		}
-
-		public KnownDirectoryItem(Configuration.KnownDirectories known, string? subDir)
-		{
-			Name = known.GetDescription();
-			KnownDirectory = known;
-			SubDirectory = subDir;
-		}
-
-		public bool IsSamePathAs(string? otherPath)
-		{
-			if (string.IsNullOrWhiteSpace(otherPath) || string.IsNullOrWhiteSpace(Directory))
-				return false;
-
-			try
-			{
-				var p1 = Path.GetFullPath(Directory);
-				var p2 = Path.GetFullPath(otherPath);
-				return p1.Equals(p2, System.StringComparison.OrdinalIgnoreCase);
-			}
-			catch { return false; }
-		}
-
-		public override string? ToString() => Name?.ToString();
 	}
+
+	public KnownDirectoryItem(Configuration.KnownDirectories known, string? subDir)
+	{
+		Name = known.GetDescription();
+		KnownDirectory = known;
+		SubDirectory = subDir;
+	}
+
+	public bool IsSamePathAs(string? otherPath)
+	{
+		if (string.IsNullOrWhiteSpace(otherPath) || string.IsNullOrWhiteSpace(Directory))
+			return false;
+
+		try
+		{
+			var p1 = Path.GetFullPath(Directory);
+			var p2 = Path.GetFullPath(otherPath);
+			return p1.Equals(p2, System.StringComparison.OrdinalIgnoreCase);
+		}
+		catch { return false; }
+	}
+
+	public override string? ToString() => Name?.ToString();
 }

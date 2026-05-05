@@ -118,6 +118,7 @@ mkdir Libation/.background
 mv background.png Libation/.background/
 ln -s /Applications "./Libation/ "
 mkdir ./bundle
+sync
 hdiutil create -srcFolder ./Libation -o "./bundle/$DMG_FILE"
 # Create a .DS_Store by:
 #  - mounting an existing image in shadow mode (hdiutil attach Libation.dmg -shadow junk.dmg)

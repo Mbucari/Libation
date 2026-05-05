@@ -60,7 +60,7 @@ public partial class SeriesViewGrid : UserControl
 		var pictureId = libraryBook.PictureLarge ?? libraryBook.PictureId;
 		if (string.IsNullOrEmpty(pictureId))
 		{
-			await MessageBox.Show(VisualRoot as Window, "No cover art is available for this book.", "No Cover Art", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			await MessageBox.Show(this.GetParentWindow(), "No cover art is available for this book.", "No Cover Art", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			return;
 		}
 

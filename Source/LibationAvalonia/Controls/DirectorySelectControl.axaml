@@ -18,13 +18,13 @@
 				<Setter Property="Height" Value="NaN"/>
 			</Style>
 		</StackPanel.Styles>
+			<!--		MinHeight="{Binding #displayPathTbox.MinHeight}" -->
 		<controls:WheelComboBox
 					HorizontalContentAlignment = "Stretch"
 					HorizontalAlignment = "Stretch"
 					Name="combo"
-					MinHeight="{Binding #displayPathTbox.MinHeight}"
-					SelectedItem="{Binding $parent[1].SelectedDirectory, Mode=TwoWay}"
-					ItemsSource="{Binding $parent[1].KnownDirectories}">
+					SelectedItem="{Binding $parent[controls:DirectorySelectControl].SelectedDirectory, Mode=TwoWay}"
+					ItemsSource="{Binding $parent[controls:DirectorySelectControl].KnownDirectories}">
 			<ComboBox.ItemTemplate>
 				<DataTemplate>
 					<TextBlock Text="{Binding Converter={StaticResource KnownDirectoryConverter}}" />
@@ -36,7 +36,7 @@
 				<MultiBinding Converter="{StaticResource KnownDirectoryPath}">
 					<MultiBinding.Bindings>
 						<Binding Path="#combo.SelectedItem"/>
-						<Binding Path="$parent[1].SubDirectory"/>
+						<Binding Path="$parent[controls:DirectorySelectControl].SubDirectory"/>
 					</MultiBinding.Bindings>
 				</MultiBinding>
 			</TextBox.Text>

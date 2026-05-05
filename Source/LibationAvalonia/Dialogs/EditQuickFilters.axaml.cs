@@ -86,7 +86,7 @@ public partial class EditQuickFilters : DialogWindow
 		ReIndexFilters();
 	}
 
-	protected override void SaveAndClose()
+	public new void SaveAndClose()
 	{
 		QuickFilters.ReplaceAll(Filters.Select(x => x.AsNamedFilter()).OfType<QuickFilters.NamedFilter>());
 		base.SaveAndClose();

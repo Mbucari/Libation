@@ -321,7 +321,7 @@ public class CommonFormattersTests
 		// THEN
 		Assert.AreEqual(expected, unescaped);
 	}
-	
+
 
 	private class TestClass
 	{

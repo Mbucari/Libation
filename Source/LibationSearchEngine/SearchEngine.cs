@@ -86,9 +86,9 @@ public class SearchEngine
 		// Corruption (e.g. checksum mismatch in segments) is not fixed by waiting; clear and rebuild immediately.
 		var corruptRebuildAttemptsRemaining = 2;
 
-        // Exponential backoff retry: 400 ms, 800 ms, 1600 ms, etc
+		// Exponential backoff retry: 400 ms, 800 ms, 1600 ms, etc
 		// Total wait time before giving up: 12.4 sec
-        for (var attempt = 0; attempt < maxRetries; attempt++)
+		for (var attempt = 0; attempt < maxRetries; attempt++)
 		{
 			try
 			{
@@ -118,13 +118,13 @@ public class SearchEngine
 		}
 	}
 
-    /// <summary>
-    /// Lucene 3 parses <c>segments_*</c> filenames in the index directory. Cloud sync (e.g. OneDrive) can leave debris
-    /// or conflict copies whose names break that parser, throwing <see cref="ArgumentException"/> with this message shape.
-    /// Actual error is likely to be something like: Invalid or unsupported character in number, hence this string check.
-    /// <see cref="CorruptIndexException"/> (e.g. checksum mismatch in segments) is also recoverable by deleting the index and rebuilding.
-    /// </summary>
-    public static bool IsRecoverableCorruptIndexException(Exception ex)
+	/// <summary>
+	/// Lucene 3 parses <c>segments_*</c> filenames in the index directory. Cloud sync (e.g. OneDrive) can leave debris
+	/// or conflict copies whose names break that parser, throwing <see cref="ArgumentException"/> with this message shape.
+	/// Actual error is likely to be something like: Invalid or unsupported character in number, hence this string check.
+	/// <see cref="CorruptIndexException"/> (e.g. checksum mismatch in segments) is also recoverable by deleting the index and rebuilding.
+	/// </summary>
+	public static bool IsRecoverableCorruptIndexException(Exception ex)
 		=> ex is CorruptIndexException
 		|| (ex is ArgumentException aex && aex.Message.Contains("character in number", StringComparison.OrdinalIgnoreCase));
 

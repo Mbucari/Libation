@@ -12,7 +12,7 @@
 		<controls:GroupBox
 			Grid.Row="0"
 			Margin="5"
-			Label="{CompiledBinding BadBookGroupboxText}">
+			Label="{Binding BadBookGroupboxText}">
 
 			<Grid
 				ColumnDefinitions="*,*"
@@ -29,36 +29,36 @@
 				<RadioButton
 					Grid.Column="0"
 					Grid.Row="0"
-					IsChecked="{CompiledBinding BadBookAsk, Mode=TwoWay}">
+					IsChecked="{Binding BadBookAsk, Mode=TwoWay}">
 
-					<TextBlock Text="{CompiledBinding BadBookAskText}" />
+					<TextBlock Text="{Binding BadBookAskText}" />
 
 				</RadioButton>
 
 				<RadioButton
 					Grid.Column="1"
 					Grid.Row="0"
-					IsChecked="{CompiledBinding BadBookAbort, Mode=TwoWay}">
+					IsChecked="{Binding BadBookAbort, Mode=TwoWay}">
 
-					<TextBlock Text="{CompiledBinding BadBookAbortText}" />
+					<TextBlock Text="{Binding BadBookAbortText}" />
 
 				</RadioButton>
 
 				<RadioButton
 					Grid.Column="0"
 					Grid.Row="1"
-					IsChecked="{CompiledBinding BadBookRetry, Mode=TwoWay}">
+					IsChecked="{Binding BadBookRetry, Mode=TwoWay}">
 
-					<TextBlock Text="{CompiledBinding BadBookRetryText}" />
+					<TextBlock Text="{Binding BadBookRetryText}" />
 
 				</RadioButton>
 
 				<RadioButton
 					Grid.Column="1"
 					Grid.Row="1"
-					IsChecked="{CompiledBinding BadBookIgnore, Mode=TwoWay}">
+					IsChecked="{Binding BadBookIgnore, Mode=TwoWay}">
 
-					<TextBlock Text="{CompiledBinding BadBookIgnoreText}" />
+					<TextBlock Text="{Binding BadBookIgnoreText}" />
 
 				</RadioButton>
 			</Grid>
@@ -90,12 +90,12 @@
 					Grid.Row="0"
 					Grid.Column="0"
 					Margin="0,5,0,0"
-					Text="{CompiledBinding FolderTemplateText}" />
+					Text="{Binding FolderTemplateText}" />
 
 				<TextBox
 					Grid.Row="1"
 					Grid.Column="0"
-					Text="{CompiledBinding FolderTemplate}" />
+					Text="{Binding FolderTemplate}" />
 
 				<Button
 					Grid.Row="1"
@@ -106,12 +106,12 @@
 				<TextBlock
 					Grid.Row="2"
 					Grid.Column="0"
-					Text="{CompiledBinding FileTemplateText}" />
+					Text="{Binding FileTemplateText}" />
 
 				<TextBox
 					Grid.Row="3"
 					Grid.Column="0"
-					Text="{CompiledBinding FileTemplate}" />
+					Text="{Binding FileTemplate}" />
 
 				<Button
 					Grid.Row="3"
@@ -122,12 +122,12 @@
 				<TextBlock
 					Grid.Row="4"
 					Grid.Column="0"
-					Text="{CompiledBinding ChapterFileTemplateText}" />
+					Text="{Binding ChapterFileTemplateText}" />
 
 				<TextBox
 					Grid.Row="5"
 					Grid.Column="0"
-					Text="{CompiledBinding ChapterFileTemplate}" />
+					Text="{Binding ChapterFileTemplate}" />
 
 				<Button
 					Grid.Row="5"
@@ -140,7 +140,7 @@
 					Grid.Column="0"
 					Height="30"
 					Margin="0"
-					Content="{CompiledBinding EditCharReplacementText}"
+					Content="{Binding EditCharReplacementText}"
 					Click="EditCharReplacementButton_Click" />
 
 			</Grid>
@@ -156,11 +156,11 @@
 				<TextBlock
 					Margin="0,0,0,10"
 					TextWrapping="Wrap"
-					Text="{CompiledBinding InProgressDescriptionText}" />
+					Text="{Binding InProgressDescriptionText}" />
 
 				<controls:DirectoryOrCustomSelectControl
-					Directory="{CompiledBinding InProgressDirectory, Mode=TwoWay}"
-					KnownDirectories="{CompiledBinding KnownDirectories}" />
+					Directory="{Binding InProgressDirectory, Mode=TwoWay}"
+					KnownDirectories="{Binding KnownDirectories}" />
 
 			</StackPanel>
 		</controls:GroupBox>
@@ -172,23 +172,23 @@
 			<CheckBox
 				Margin="5"
 				VerticalAlignment="Top"
-				IsVisible="{CompiledBinding !Config.IsLinux}"
-				IsChecked="{CompiledBinding UseCoverAsFolderIcon, Mode=TwoWay}">
+				IsVisible="{Binding !Config.IsLinux}"
+				IsChecked="{Binding UseCoverAsFolderIcon, Mode=TwoWay}">
 
 				<TextBlock
 					TextWrapping="Wrap"
-					Text="{CompiledBinding UseCoverAsFolderIconText}" />
+					Text="{Binding UseCoverAsFolderIconText}" />
 
 			</CheckBox>
 
 			<CheckBox
 				Margin="5"
 				VerticalAlignment="Top"
-				IsChecked="{CompiledBinding SaveMetadataToFile, Mode=TwoWay}">
+				IsChecked="{Binding SaveMetadataToFile, Mode=TwoWay}">
 
 				<TextBlock
 					TextWrapping="Wrap"
-					Text="{CompiledBinding SaveMetadataToFileText}" />
+					Text="{Binding SaveMetadataToFileText}" />
 
 			</CheckBox>
 		</StackPanel>

@@ -6,7 +6,7 @@ namespace LibationAvalonia.Dialogs;
 
 public partial class LiberatedStatusBatchManualDialog : DialogWindow
 {
-	private class liberatedComboBoxItem
+	public class liberatedComboBoxItem
 	{
 		public LiberatedStatus Status { get; set; }
 		public string? Text { get; set; }
@@ -27,11 +27,11 @@ public partial class LiberatedStatusBatchManualDialog : DialogWindow
 		}
 	}
 
-	public IList BookStatuses { get; } = new List<liberatedComboBoxItem>
-	{
+	public List<liberatedComboBoxItem> BookStatuses { get; } =
+	[
 		new liberatedComboBoxItem { Status = LiberatedStatus.Liberated, Text = "Downloaded" },
 		new liberatedComboBoxItem { Status = LiberatedStatus.NotLiberated, Text = "Not Downloaded" },
-	};
+	];
 
 	public LiberatedStatusBatchManualDialog(bool isPdf) : this()
 	{
@@ -42,7 +42,7 @@ public partial class LiberatedStatusBatchManualDialog : DialogWindow
 	public LiberatedStatusBatchManualDialog()
 	{
 		InitializeComponent();
-		SelectedItem = BookStatuses[0] as liberatedComboBoxItem;
+		SelectedItem = BookStatuses[0];
 		DataContext = this;
 		ControlToFocusOnShow = SaveButton;
 	}
