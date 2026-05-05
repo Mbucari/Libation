@@ -48,9 +48,9 @@ public record CultureInfoDto : IFormattable
 	{
 		var cultures = CultureInfo.GetCultures(types);
 		return Match(cultures, input, c => c.Name) ??
-		       Match(cultures, input, c => c.TwoLetterISOLanguageName) ??
-		       Match(cultures, input, c => c.ThreeLetterISOLanguageName) ??
-		       Match(cultures, input, c => c.EnglishName);
+			   Match(cultures, input, c => c.TwoLetterISOLanguageName) ??
+			   Match(cultures, input, c => c.ThreeLetterISOLanguageName) ??
+			   Match(cultures, input, c => c.EnglishName);
 	}
 
 	private static CultureInfo? Match(IEnumerable<CultureInfo> cultures, string input, Func<CultureInfo, string?> selector, StringComparison cmp = StringComparison.OrdinalIgnoreCase)

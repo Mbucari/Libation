@@ -29,7 +29,7 @@ public partial record UpgradeProperties
 		ZipUrl = zipUrl;
 		LatestRelease = latestRelease;
 
-        var text = NoAppBlockRegex().Replace(notes, "");
+		var text = NoAppBlockRegex().Replace(notes, "");
 		text = LinkStripRegex().Replace(text, "$1");
 		Notes = text.Trim();
 	}
@@ -37,6 +37,6 @@ public partial record UpgradeProperties
 	[GeneratedRegex(@"\[(.*)\]\(.*\)")]
 	private static partial Regex LinkStripRegex();
 
-    [GeneratedRegex(@"<!-- BEGIN NO-APP -->.*?<!-- END NO-APP -->", RegexOptions.Singleline)]
-    private static partial Regex NoAppBlockRegex();
+	[GeneratedRegex(@"<!-- BEGIN NO-APP -->.*?<!-- END NO-APP -->", RegexOptions.Singleline)]
+	private static partial Regex NoAppBlockRegex();
 }

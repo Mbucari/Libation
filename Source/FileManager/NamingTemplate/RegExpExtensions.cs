@@ -60,7 +60,7 @@ public static class RegExpExtensions
 			{
 				// part before match
 				if (m.Index > pos)
-					sb.Append(gapEvaluator(input[pos .. m.Index]));
+					sb.Append(gapEvaluator(input[pos..m.Index]));
 
 				// the match itself
 				sb.Append(matchEvaluator(m));

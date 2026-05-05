@@ -63,7 +63,7 @@ public class NamingTemplate
 
 		return (_templateToString.DynamicInvoke(delegateArgs) as TemplatePart)!.FirstPart;
 	}
-	
+
 	/// <summary>Parse a template string to a <see cref="NamingTemplate"/></summary>
 	/// <param name="template">The template string to parse</param>
 	/// <param name="tagCollections">A collection of <see cref="TagCollection"/> with

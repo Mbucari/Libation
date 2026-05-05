@@ -368,7 +368,7 @@ public abstract partial class Templates
 		{
 			return intVal;
 		}
-		
+
 		// then check for property tags and retrieve their value
 		foreach (var c in allPropertyTags.OfType<PropertyTagCollection<LibraryBookDto>>())
 		{

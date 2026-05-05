@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using FileManager.NamingTemplate;
 
-namespace LibationFileManager.Templates; 
+namespace LibationFileManager.Templates;
 
 public class ContributorDto(string name, string? audibleContributorId) : IFormattable
 {

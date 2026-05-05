@@ -42,7 +42,7 @@ public partial class LiberatedStatusBatchManualDialog : DialogWindow
 	public LiberatedStatusBatchManualDialog()
 	{
 		InitializeComponent();
-		SelectedItem = BookStatuses[0] as liberatedComboBoxItem;
+		SelectedItem = BookStatuses[0];
 		DataContext = this;
 		ControlToFocusOnShow = SaveButton;
 	}

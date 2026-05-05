@@ -20,10 +20,10 @@ public class PropertyTagCollection<TClass> : TagCollection
 			var parameters = formatter.Method.GetParameters();
 
 			if (formatter.Method.ReturnType != typeof(string)
-			    || parameters.Length != 4
-			    || parameters[0].ParameterType != typeof(ITemplateTag)
-			    || parameters[2].ParameterType != typeof(string)
-			    || !typeof(CultureInfo).IsAssignableFrom(parameters[3].ParameterType))
+				|| parameters.Length != 4
+				|| parameters[0].ParameterType != typeof(ITemplateTag)
+				|| parameters[2].ParameterType != typeof(string)
+				|| !typeof(CultureInfo).IsAssignableFrom(parameters[3].ParameterType))
 				throw new ArgumentException(
 					$"{nameof(defaultFormatters)} must have a signature of [{nameof(String)} PropertyFormatter<T>({nameof(ITemplateTag)}, T, {nameof(String)}, {nameof(CultureInfo)})]");
 

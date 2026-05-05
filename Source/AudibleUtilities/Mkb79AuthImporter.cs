@@ -33,7 +33,7 @@ public static class Mkb79AuthImporter
 		using var persister = AudibleApiStorage.GetAccountsSettingsPersister();
 
 		if (persister.AccountsSettings.Accounts.Any(a =>
-			    a.AccountId == account.AccountId && a.IdentityTokens?.Locale.Name == account.Locale?.Name))
+				a.AccountId == account.AccountId && a.IdentityTokens?.Locale.Name == account.Locale?.Name))
 		{
 			return new Mkb79ImportResult(Mkb79ImportOutcome.DuplicateAccount, account);
 		}
