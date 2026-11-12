@@ -62,8 +62,7 @@ public static class LibationScaffolding
 
 	// previously: System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 	private static NuGetVersion? _buildVersion;
-	public static NuGetVersion? BuildVersion
-		=> _buildVersion ??= new[] { ExecutingAssembly.GetName(), EntryAssembly?.GetName() }.Max(a => a?.Version != null ? new NuGetVersion(a.Version) : null);
+	public static NuGetVersion? BuildVersion => _buildVersion ??= GetAssemblyVersion();
 
 	/// <summary>Run migrations before loading Configuration for the first time. Then load and return Configuration</summary>
 	public static Configuration RunPreConfigMigrations()
@@ -76,12 +75,29 @@ public static class LibationScaffolding
 
 		Configuration.SetLibationVersion(BuildVersion);
 
+
 		//***********************************************//
 		//                                               //
 		//   do not use Configuration before this line   //
 		//                                               //
 		//***********************************************//
 		return Configuration.Instance;
+	}
+
+	private static NuGetVersion? GetAssemblyVersion()
+	{
+		var verStr = ExecutingAssembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
+			?? EntryAssembly?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+
+		if (!string.IsNullOrEmpty(verStr))
+		{
+			int plusIdx = verStr.IndexOf('+');
+			if (plusIdx >= 0)
+				verStr = verStr.Substring(0, plusIdx);
+			if (NuGetVersion.TryParse(verStr, out var nugetVersion))
+				return nugetVersion;
+		}
+		return new[] { ExecutingAssembly.GetName(), EntryAssembly?.GetName() }.Max(a => a?.Version != null ? new NuGetVersion(a.Version) : null);
 	}
 
 	/// <summary>most migrations go in here</summary>
