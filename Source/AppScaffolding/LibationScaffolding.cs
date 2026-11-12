@@ -89,15 +89,8 @@ public static class LibationScaffolding
 		var verStr = ExecutingAssembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
 			?? EntryAssembly?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
 
-		if (!string.IsNullOrEmpty(verStr))
-		{
-			int plusIdx = verStr.IndexOf('+');
-			if (plusIdx >= 0)
-				verStr = verStr.Substring(0, plusIdx);
-			if (NuGetVersion.TryParse(verStr, out var nugetVersion))
-				return nugetVersion;
-		}
-		return new[] { ExecutingAssembly.GetName(), EntryAssembly?.GetName() }.Max(a => a?.Version != null ? new NuGetVersion(a.Version) : null);
+		return !string.IsNullOrEmpty(verStr) && NuGetVersion.TryParse(verStr, out var nugetVersion) ? nugetVersion
+			: new[] { ExecutingAssembly.GetName(), EntryAssembly?.GetName() }.Max(a => a?.Version != null ? new NuGetVersion(a.Version) : null);
 	}
 
 	/// <summary>most migrations go in here</summary>
